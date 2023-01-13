@@ -10,7 +10,7 @@ Code for this manuscript was run in R (version 4.2, Compatible with version 3.6 
 
 For the R package required for different algorithms, please refer to the README.md file for each section (e.g., [Simulation Study](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/README.md)).
 ## Data Availability and Code Usage
-Other details and required of this manuscript are provided in the README.md file for each section.
+Other details and required of this manuscript are provided in the README.md file for each section. Most of the important code in this article is stored as R Markdown files. R Markdown is a file format for making dynamic documents with R. An R Markdown document is written in markdown (an easy-to-write plain text format) and contains chunks of embedded R code. More information about RMD can be found in the [following links](https://rmarkdown.rstudio.com/articles_intro.html).
 ## Relevant Citations
 ## Questions and Feedback
 Should you have any questions, please feel free to contact Kun Meng <kun_meng@brown.edu> or Jinyu Wang <jinyu_wang@brown.edu>.

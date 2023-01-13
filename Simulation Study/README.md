@@ -13,7 +13,11 @@ Other details of our implementation choices for the simulation algorithm are pro
 ### Parallel computing in R
 After version 2.14, R has a built-in parallel package that enhances R's parallel computing capabilities. Parallel computing uses different cpu cores for computing. For the simulation study, we need to run each algorithm 100 times to calculate the Rejection rates, and parallel computing can save a lot of time.
 
-
+Before parallel computing, we need to check the number of cores our computer can use by using the following command.
+```ruby
+library(parallel) 
+detectCores()
+```
 ## Additional Information
 1. "Algorithm 1.Rmd": This file provides the source code of the simulation studies showing the performance of Algorithm 1 proposed in MCE.
 2. "Algorithm 2.Rmd": This file provides the source code of the simulation studies showing the performance of Algorithm 2 proposed in MCE.

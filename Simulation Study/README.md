@@ -10,6 +10,10 @@ The statistical implementation of the simulation study requires the installation
 * [Rcpp](https://cran.r-project.org/web/packages/Rcpp/index.html)
 ## Code Usage
 Other details of our implementation choices for the simulation algorithm are provided below.
+### Parallel computing in R
+After version 2.14, R has a built-in parallel package that enhances R's parallel computing capabilities. Parallel computing uses different cpu cores for computing. For the simulation study, we need to run each algorithm 100 times to calculate the Rejection rates, and parallel computing can save a lot of time.
+
+
 ## Additional Information
 1. "Algorithm 1.Rmd": This file provides the source code of the simulation studies showing the performance of Algorithm 1 proposed in MCE.
 2. "Algorithm 2.Rmd": This file provides the source code of the simulation studies showing the performance of Algorithm 2 proposed in MCE.

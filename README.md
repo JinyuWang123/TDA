@@ -13,5 +13,5 @@ For the R package required for different algorithms, please refer to the README.
 Other details and required of this manuscript are provided in the readme.md file for each section.
 ## Relevant Citations
 ## Questions and Feedback
-Should you have any questions, please feel free to contact [Kun Meng](kun_meng@brown.edu) or [Jinyu Wang](jinyu_wang@brown.edu).
+Should you have any questions, please feel free to contact Kun Meng <kun_meng@brown.edu> or Jinyu Wang <jinyu_wang@brown.edu>.
 We appreciate any feedback you may have with our repository and instructions.

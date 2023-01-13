@@ -1,0 +1,101 @@
+---
+title: "Untitled"
+output: html_document
+date: "2023-01-13"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#remotes::install_github('lcrawlab/SINATRA') 
+#library(sinatra)
+#Post ETC alignments script
+
+# Setup: Grid of 2918 directions 
+# And discretization of 0(3) of size 16,000
+# Prerequisities: The rotations corresponding to the permutations have been computed
+library(Rvcg)
+
+# Step 0: Load in the permutation-rotation setup:
+
+
+rotations=readRDS("~/TDA/Mandibular Molars/ECT_alignment_demo/res/rots")
+permutations=readRDS("~/TDA/Mandibular Molars/ECT_alignment_demo/res/perms")
+
+dir=readRDS("~/TDA/Mandibular Molars/ECT_alignment_demo/postECTmiscdata/directions")
+GRID=readRDS("~/TDA/Mandibular Molars/ECT_alignment_demo/postECTmiscdata/grid")
+```
+
+```{r}
+# Step 2: compute the euler curves (note directions already specified)
+
+frobnorm=function(x){
+  return(sqrt(sum(x^2)))
+}
+
+# A script for reading .OFF files
+process_off_file_v3=function(input_dir){
+  off=vcgImport(input_dir,silent = TRUE)
+  vertices=as.matrix(t(off$vb)[,1:3])
+  vertices=t(t(vertices)-colMeans(vertices))
+  vertices=vertices/frobnorm(vertices)
+  faces=as.matrix(t(off$it))
+  edges=vcgGetEdge(off)
+  edges=as.matrix(edges[,1:2])
+  complex <- list(Vertices = vertices, Edges = edges, Faces = faces)
+  return(complex)
+}
+
+
+library(sinatra)
+# Step 1: Compute the Euler curves
+meshes=c()
+data_dir="C:/Users/wjyjy/Documents/TDA/Mandibular Molars/new_teeth_ect_aligned_by_species/Tarsius/"
+mesh_files <- list.files(file.path(data_dir), full.names = TRUE)
+for (i in 1:length(mesh_files)) {
+  mesh_orig=mesh_files[i]
+  meshes=c(meshes,process_off_file_v3(mesh_orig))
+  
+}
+
+```
+
+
+```{r}
+### scale and center ###
+
+
+
+bradius=0
+for (i in 1:length(mesh_files)) {
+  index=1+3*(i-1)
+  coords=meshes[[index]]
+  #coords=coords-rowMeans(coords)
+  #coords=coords/sqrt(sum(coords^2))
+  bradius=max(bradius,max(abs(coords)))
+  print(bradius)
+  meshes[[index]]=coords
+}
+
+curve_length=200
+### Scale and center ends ###
+data=list()
+#data <- matrix(NA,nrow=0,ncol = 1+curve_length*( dim(dir)[1]) )
+for (i in 1:length(mesh_files)) {
+  index1=1+3*(i-1)
+  index2=3+3*(i-1)
+  ec_curve1=matrix(ncol=curve_length,nrow=dim(dir)[1])
+  complex1=meshes[index1:index2]
+  for (j in 1:dim(dir)[1]){
+    vertex_function1 <- complex1$Vertices%*%c(dir[j,1],dir[j,2],dir[j,3])
+    curve1 <- compute_standardized_ec_curve(complex1, vertex_function1, curve_length-1, FALSE,ball_radius = bradius)[,2]
+    ec_curve1[j,]<-curve1
+    
+  }
+  data[[i]]<-ec_curve1
+}
+save(data,file="C:/Users/wjyjy/Documents/TDA/Mandibular Molars/alignment_ECT/Tarsius.RData")
+
+```

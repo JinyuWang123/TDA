@@ -1,0 +1,40 @@
+---
+title: "Untitled"
+output: html_document
+date: "2023-01-06"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+cat("\014")
+
+### Clear Environment ### 
+rm(list = ls(all = TRUE))
+
+### Load in the R libraries ###
+library(BGLR)
+library(doParallel)
+library(Rcpp)
+library(RcppArmadillo)
+library(RcppParallel)
+#library(R.matlab)
+```
+
+```{r}
+source("./TDA/Silhouette Database/Software/EC3D.R")
+
+
+### Set up the Parameters ###
+startdir = "./TDA/Silhouette Database/Data"
+in.dir = "./TDA/Silhouette Database/Data/All_img"
+out.file = "./TDA/Silhouette Database/Data/MRIECs.RData"
+```
+
+
+```{r}
+### Run The Euler Characteristic Function ###
+ecf = ecf(in.dir = in.dir,out.file = out.file,img.dir = "baseline/Segmentations/enh",first.only = TRUE)
+```

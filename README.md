@@ -9,3 +9,9 @@ Results in the manuscript were derived by using the R version of the code. Based
 Code for this manuscript was written in R (version 4.2, Compatible with version 3.6 - 4.2). R is a widely used, free, and open source software environment for statistical computing and graphics. The most recent version of R can be downloaded from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/). For specific details on how to compile, install, and manage R and R-packages, refer to the manual [R Installation and Administration](https://cran.r-project.org/doc/manuals/r-release/R-admin.html).
 
 For the R package required for different algorithms, please refer to the README.md file for each section.
+## Data Availability and Code Usage
+Other details and required of this manuscript are provided in the readme.md file for each section.
+## Relevant Citations
+## Questions and Feedback
+Should you have any questions, please feel free to contact [Kun Meng](kun_meng@brown.edu) or [Jinyu Wang](jinyu_wang@brown.edu).
+We appreciate any feedback you may have with our repository and instructions.

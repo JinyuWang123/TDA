@@ -18,6 +18,11 @@ Before parallel computing, we need to check the number of cores our computer can
 library(parallel) 
 detectCores()
 ```
+For example, the number of cores my computer can use is 16, so I use the following command to conduct parallel computing.
+```ruby
+cl <- makeCluster(16)
+registerDoParallel(cl)
+```
 ## Additional Information
 1. "Algorithm 1.Rmd": This file provides the source code of the simulation studies showing the performance of Algorithm 1 proposed in MCE.
 2. "Algorithm 2.Rmd": This file provides the source code of the simulation studies showing the performance of Algorithm 2 proposed in MCE.

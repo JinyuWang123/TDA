@@ -6,3 +6,4 @@ Results in the manuscript were derived by using the R version of the code. Based
 2. Silhouette Database (Section 6.1 of the manuscript)
 3. Mandibular Molars (Section 6.2 of the manuscript)
 ## The R Environment
+Code for this manuscript was written in R (version 4.2, Compatible with version 3.6 - 4.2). R is a widely used, free, and open source software environment for statistical computing and graphics. The most recent version of R can be downloaded from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/)

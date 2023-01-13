@@ -1,5 +1,5 @@
 # Simulation Study
-refer to section 5 of the manuscript
+Refer to section 5 of the manuscript
 ## Purpose
 The purpose of this section is to provide the exact scripts/code used to produce to the simulation results in the manuscript.
 ## Package Details and Requirements
@@ -8,3 +8,9 @@ The statistical implementation of the simulation study requires the installation
 * [foreach](https://cran.r-project.org/web/packages/foreach/index.html)
 * [doParallel](https://cran.r-project.org/web/packages/doParallel/index.html)
 * [Rcpp](https://cran.r-project.org/web/packages/Rcpp/index.html)
+## Code Usage
+Other details of our implementation choices for the simulation algorithm are provided below.
+## Additional Information
+1. "Algorithm 1.Rmd": This file provides the source code of the simulation studies showing the performance of Algorithm 1 proposed in MCE.
+2. "Algorithm 2.Rmd": This file provides the source code of the simulation studies showing the performance of Algorithm 2 proposed in MCE.
+3. "Algorithm 3.Rmd": This file provides the source code of the simulation studies showing the performance of Algorithm 3 proposed in MCE.

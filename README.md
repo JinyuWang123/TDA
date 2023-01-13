@@ -8,7 +8,7 @@ Results in the manuscript were derived by using the R version of the code. Based
 ## The R Environment
 Code for this manuscript was written in R (version 4.2, Compatible with version 3.6 - 4.2). R is a widely used, free, and open source software environment for statistical computing and graphics. The most recent version of R can be downloaded from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/). For specific details on how to compile, install, and manage R and R-packages, refer to the manual [R Installation and Administration](https://cran.r-project.org/doc/manuals/r-release/R-admin.html).
 
-For the R package required for different algorithms, please refer to the README.md file for each section [Simulation Study](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/README.md).
+For the R package required for different algorithms, please refer to the README.md file for each section (e.g., [Simulation Study](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/README.md)).
 ## Data Availability and Code Usage
 Other details and required of this manuscript are provided in the README.md file for each section.
 ## Relevant Citations

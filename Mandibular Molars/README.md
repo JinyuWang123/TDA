@@ -16,3 +16,5 @@ Next, to load the package, use the command:
 ```ruby
 library(sinatra)
 ```
+## Raw Data
+We consider a data set of mandibular molars from two suborders of primates -- Haplorhini ([“dry-nosed” primates](https://gaotingran.com/codes/codes.html));and Strepsirrhini ([“moist-nosed” primates](https://www.morphosource.org/projects/000000C89)) (see Figure 6). In the haplorhine suborder collection, 33 molars came from the genus Tarsius (see Figure 6 and the yellow panels in Figure 1), and 9 molars came from the genus Saimiri (see Figure 6 and the grey panels in Figure 1). In the strepsirrhine suborder collection, 11 molars came from the genus Microcebus (see Figure 6 and the blue panels in Figure 1), and 6 molars came from the genus Mirza (see Figure 6 and the green panels in Figure 1).

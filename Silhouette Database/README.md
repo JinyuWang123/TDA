@@ -20,7 +20,7 @@ Based on the calculated [ECT](https://github.com/JinyuWang123/TDA/blob/main/Silh
 
 In addition to testing the difference between shape classes, we applied the algorithms within each shape class. Specifically, for each shape class, we randomly split the class into two halves and applied the algorithms to test the difference between the two halves. We repeated the random splitting procedure 100 times and presented the corresponding p-values in Table 2 (rows 4-6). 
 ### Parallel computing in R
-After version 2.14, R has a built-in parallel package that enhances R's parallel computing capabilities. Parallel computing uses different cpu cores for computing. For the simulation study, we need to run each algorithm 100 times to calculate the Rejection rates, and parallel computing can save a lot of time.
+After version 2.14, R has a built-in parallel package that enhances R's parallel computing capabilities. Parallel computing uses different cpu cores for computing. Parallel computing can save a lot of time.
 
 Before parallel computing, we need to check the number of cores our computer can use by using the following command.
 ```ruby

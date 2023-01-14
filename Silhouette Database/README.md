@@ -8,3 +8,5 @@ The statistical implementation of the simulation study requires the installation
 * [Rcpp](https://cran.r-project.org/web/packages/Rcpp/index.html)
 * [RcppArmadillo](https://cran.r-project.org/web/packages/RcppArmadillo/index.html)
 * [RcppParallel](https://cran.r-project.org/web/packages/RcppParallel/index.html)
+## Raw Data
+For the locations of the data used in this section, please use this [link](https://dabi.temple.edu/external/shape/MPEG7/dataset.html).

@@ -21,7 +21,20 @@ We consider a data set of mandibular molars from two suborders of primates -- Ha
 ## Code Usage
 Other details of our implementation choices for the algorithm are provided below.
 ### Align the ECCSs
-Before applying Algorithms 1 and 2, we performed the ECT on the raw data and normalized the polygon meshes by aligning the ECCs. The details of the ECT-based alignment procedure are given in [Wang et al. (2021)](https://projecteuclid.org/journals/annals-of-applied-statistics/volume-15/issue-2/A-statistical-pipeline-for-identifying-physical-features-that-differentiate-classes/10.1214/20-AOAS1430.full) (particularly, Section 4 of its Supplementary Material). The aligned molars are presented in Figure 1.
+Before applying Algorithms 1 and 2, we performed the ECT on the raw data and normalized the polygon meshes by aligning the ECCs. The details of the ECT-based alignment procedure are given in [Wang et al. (2021)](https://projecteuclid.org/journals/annals-of-applied-statistics/volume-15/issue-2/A-statistical-pipeline-for-identifying-physical-features-that-differentiate-classes/10.1214/20-AOAS1430.full) (particularly, Section 4 of its Supplementary Material). The aligned molars are presented in Figure 1. To reproduce the Figure 1, we can run the [Fig1.R](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Fig1.R).
 ### Conduct the Euler characteristic transformation on the raw data for each tooth
+For each shape in Fig. 6, first we computed its ECT. Specifically, we computed the ECCs for 2918 directions; in each direction, we used 100 sublevels. To reproduce this process, we need to run the file [ECT_computation.Rmd](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/ECT_computation.Rmd). The calculated ECT data will be stored in [alignment_ECT](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/alignment_ECT).
 
-For each shape in Fig. 6, first we computed its ECT. Specifically, we computed the ECCs for 2918 directions evenly sampled over the interval $[0,2\pi]$; in each direction, we used 100 sublevels. To reproduce this process, we need to run the file [ECT_Computation.Rmd](https://github.com/JinyuWang123/TDA/blob/main/Silhouette%20Database/ECT_Computation.Rmd). The calculated ECT data will be stored in [Data/MRIECs.RData](https://github.com/JinyuWang123/TDA/blob/main/Silhouette%20Database/Data/MRIECs.RData). This RData file contains a list variable of length 60, where list[1]-list[20] is the ECT data corresponding to apples, list[21]-list[40] is the ECT data corresponding to children, and list[41]-list[60] is the ECT data corresponding to hearts
+### Parallel computing in R
+After version 2.14, R has a built-in parallel package that enhances R's parallel computing capabilities. Parallel computing uses different cpu cores for computing. Parallel computing can save a lot of time.
+
+Before parallel computing, we need to check the number of cores our computer can use by using the following command.
+```ruby
+library(parallel) 
+detectCores()
+```
+For example, the number of cores my computer can use is 16, so I use the following command to conduct parallel computing.
+```ruby
+cl <- makeCluster(16)
+registerDoParallel(cl)
+```

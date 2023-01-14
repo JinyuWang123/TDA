@@ -7,6 +7,7 @@ The statistical implementation of the simulation study requires the installation
 * [Rvcg](https://cran.r-project.org/web/packages/Rvcg/index.html)
 * [Morpho](https://cran.r-project.org/web/packages/Morpho/index.html)
 * [rgl](https://cran.r-project.org/web/packages/rgl/index.html)
+
 And To install the sinatra package, we will use the [remotes](https://cran.r-project.org/web/packages/remotes/index.html) package and run the command:
 ```ruby
 remotes::install_github('lcrawlab/SINATRA') 

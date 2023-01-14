@@ -13,7 +13,7 @@ A shape database that has been commonly used in image retrieval is the [MPEG-7 s
 ## Code Usage
 Other details of our implementation choices for the algorithm are provided below.
 ### Conduct the Euler characteristic transformation on the raw data for each shape
-For each shape in Fig. 5, first we computed its ECT. Specifically, we computed the ECCs for 72 directions evenly sampled over the interval $[0,2\pi]$; in each direction, we used 100 sublevels.
+For each shape in Fig. 5, first we computed its ECT. Specifically, we computed the ECCs for 72 directions evenly sampled over the interval $[0,2\pi]$; in each direction, we used 100 sublevels. To reproduce this process, we need to run the file [ECT_Computation.Rmd](https://github.com/JinyuWang123/TDA/blob/main/Silhouette%20Database/ECT_Computation.Rmd). The calculated ECT data will be stored in [Data/MRIECs.RData](https://github.com/JinyuWang123/TDA/blob/main/Silhouette%20Database/Data/MRIECs.RData).
 
 ### Compute the SECT and Conduct Hypothesis test
 Based on the calculated [ECT](https://github.com/JinyuWang123/TDA/blob/main/Silhouette%20Database/Data/MRIECs.RData), we can calculate the SECT. And then We applied Algorithms 1 and Algorithms 2 to the three classes of shapes to test the null hypothesis that the shapes are different between the pairs of groups and presented the results in Table 2.

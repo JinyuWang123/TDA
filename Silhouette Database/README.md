@@ -12,4 +12,4 @@ The statistical implementation of the simulation study requires the installation
 A shape database that has been commonly used in image retrieval is the [MPEG-7 shape silhouette database](https://dabi.temple.edu/external/shape/MPEG7/dataset.html). We used a subset of this database which includes three class of objects: Apple, Heart and Children. There were 20 examples for each class for a total of 60 shapes. The shapes are displayed in Fig. 5. 
 ## Code Usage
 Other details of our implementation choices for the algorithm are provided below.
-### 
+### Conduct the Euler characteristic transformation on the raw data for each shape

@@ -9,6 +9,7 @@ The statistical implementation of the simulation study requires the installation
 * [RcppArmadillo](https://cran.r-project.org/web/packages/RcppArmadillo/index.html)
 * [RcppParallel](https://cran.r-project.org/web/packages/RcppParallel/index.html)
 ## Raw Data
-For the locations of the data used in this section, please use this [link](https://dabi.temple.edu/external/shape/MPEG7/dataset.html).
+A shape database that has been commonly used in image retrieval is the [MPEG-7 shape silhouette database](https://dabi.temple.edu/external/shape/MPEG7/dataset.html). We used a subset of this database which includes three class of objects: Apple, Heart and Children. There were 20 examples for each class for a total of 60 shapes. The shapes are displayed in Fig. 5. 
 ## Code Usage
 Other details of our implementation choices for the algorithm are provided below.
+### 

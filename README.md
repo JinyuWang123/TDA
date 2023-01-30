@@ -12,6 +12,7 @@ For the R package required for different algorithms, please refer to the README.
 ## Data Availability and Code Usage
 Other details and required information of this manuscript are provided in the README.md file for each section. Most of the important code in this article is stored as R Markdown files. R Markdown is a file format for making dynamic documents with R. An R Markdown document is written in markdown (an easy-to-write plain text format) and contains chunks of embedded R code. More information about RMD can be found in the [following links](https://rmarkdown.rstudio.com/articles_intro.html).
 ## Relevant Citations
+K. Meng, J. Wang, L. Crawford and A. Eloyan. Randomness and Statistical Inference of Shapes via the Smooth Euler Characteristic Transform. arXiv preprint arXiv:2204.12699v2, 2023.
 ## Questions and Feedback
 Should you have any questions, please feel free to contact Kun Meng <kun_meng@brown.edu> or Jinyu Wang <jinyu_wang@brown.edu>.
 We appreciate any feedback you may have with our repository and instructions.

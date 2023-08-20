@@ -23,13 +23,13 @@ Tarsius = data
 
 ```{r}
 ECT_list=list()
-for (i in 1:32) {
+for (i in 1:28) {
   ECT_list[[i]]=t(Tarsius[[i]])
 }
 ```
 
 ```{r}
-number_iterations =32
+number_iterations =28
 number_directions = 2918
 grid_length = 200
 T=3
@@ -68,7 +68,7 @@ number_permutations=100
   SECT_2_original_list=list()
   chisq_statistic_seq=vector()
   SECT_both_list = SECT_list
-  number_iterations=16
+  number_iterations=14
   
   p_value_seq=list()
   p_value_seq <- foreach(perm = 1:number_permutations) %dopar% {

@@ -9,7 +9,7 @@ rotation_matrix=matrix(c(0.8065218,0.5911149,0.01028626,0,0.5583186,-0.7558216,0
 
 open3d()
 rgl.bg(color = 'white')
-mfrow3d(nr=6,nc = 10)
+mfrow3d(nr=5,nc = 11)
 rgl.bg(color = 'white')
 tarsius_files = list.files('C:/Users/wjyjy/Documents/TDA/Mandibular Molars/new_teeth_ect_aligned_by_species/Tarsius/',full.names = TRUE)
 microcebus_files = list.files('C:/Users/wjyjy/Documents/TDA/Mandibular Molars/new_teeth_ect_aligned_by_species/Microcebus/',full.names = TRUE)

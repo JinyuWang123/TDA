@@ -249,6 +249,6 @@ for (i in 21:40) {
   increasing_chisq_stat=sort(chisq_statistic_seq)
   alpha_type_one_er=0.05
   rejection_indicators=chisq_statistic_original>increasing_chisq_stat[number_permutations-floor(alpha_type_one_er*number_permutations)]
-  p_value=1-(which(increasing_chisq_stat>chisq_statistic_original)[1])/1000
+  if(chisq_statistic_original>increasing_chisq_stat[1000]){p_value=0}else{p_value=1-(which(increasing_chisq_stat>chisq_statistic_original)[1])/1000}
   p_value
 ```

@@ -127,11 +127,12 @@ number_permutations=100
   
   CovKer=cov(t(demean_all))
   eigen_results=eigen(CovKer)
-  
+  result <- pmax(eigen_results$values, 0)
+
   # We only care about the components having 99% cumulative variance.
-  L_original=max(which(cumsum(eigen_results$values)/sum(eigen_results$values)<0.99))
+  L_original=max(which(cumsum(result)/sum(result)<0.99))
   L=L_original
-  Eigen_values=(T/grid_length)*eigen_results$values[1:L]
+  Eigen_values=(T/grid_length)*result[1:L]
   Eigen_vectors=sqrt(grid_length/T)*eigen_results$vectors[,1:L]
   
   Xis=matrix(NA, ncol = L, nrow = number_iterations)
@@ -216,10 +217,11 @@ number_permutations=100
     
     CovKer=cov(t(demean_all))
     eigen_results=eigen(CovKer)
-    
+    result <- pmax(eigen_results$values, 0)
+
     # We only care about the components having 99% cumulative variance.
     L=L_original
-    Eigen_values=(T/grid_length)*eigen_results$values[1:L]
+    Eigen_values=(T/grid_length)*result[1:L]
     Eigen_vectors=sqrt(grid_length/T)*eigen_results$vectors[,1:L]
     
     Xis=matrix(NA, ncol = L, nrow = number_iterations)

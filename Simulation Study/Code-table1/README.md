@@ -11,4 +11,4 @@ Running [Algorithm 2.Rmd](https://github.com/JinyuWang123/TDA/blob/main/Simulati
 ### If you want to calculate the rejection rates of the algorithms at different epsilon values, you only need to change the epsilon value in the part of the code that reads: 
 
 ### "# The parameter determining the distribution P^{(epsilon)} 
-### epsilon=0"."
+### epsilon=0"

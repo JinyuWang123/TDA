@@ -59,7 +59,7 @@ R=0.2
 # Variance of the random axis lengths
 radius_variance=0.05
 # Number of simulation studies
-number_studies=2
+number_studies = 100
 # The parameter determining the distribution P^{(epsilon)}
 epsilon=0
 

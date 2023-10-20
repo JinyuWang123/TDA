@@ -60,7 +60,7 @@ radius_variance=0.05
 # Number of simulation studies
 number_studies=100
 # The parameter determining the distribution P^{(epsilon)}
-epsilon=0.05
+epsilon=0
 # Expected type-one error rate
 alpha_type_one_er=0.05
 

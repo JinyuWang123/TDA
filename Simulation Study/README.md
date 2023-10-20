@@ -1,10 +1,15 @@
 # Simulation Study
 Refer to section 6 of the manuscript
 ## Organization
+
 ### Code for table1
 Code-table1 produces the results displayed in Table 1.
 ### Code for table4
 Code-table4 produces the results displayed in Table 4.
+### Code for table5
+Code-table5 produces the results displayed in Table 5.
+### Code for table6
+Code-table6 produces the results displayed in Table 6.
 ## Package Details and Requirements
 The statistical implementation of the simulation study requires the installation of the following important R libraries (we can [install R packages from the command line](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Installing-packages)):
 * [TDA](https://cran.r-project.org/web/packages/TDA/index.html)

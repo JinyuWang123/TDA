@@ -1,0 +1,323 @@
+---
+title: "Untitled"
+output: html_document
+date: "2023-03-07"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+cat("\014")
+rm(list = ls(all = TRUE))
+```
+
+```{r}
+#install.packages("MASS")
+library("MASS")
+#install.packages("Matrix")
+library("Matrix")
+#install.packages("vegan")
+library("vegan")
+#install.packages("plot3D")
+library("plot3D")
+#install.packages("TDA")
+library("TDA")
+#install.packages("Rcpp")
+library("Rcpp")
+#install.packages("plotrix")
+library("plotrix")
+#install.packages("mvtnorm")
+library("mvtnorm")
+#install.packages("goftest")
+library("goftest")
+#install.packages("foreach")
+library(foreach)
+#install.packages("doParallel")
+library(doParallel)
+library(iterators)
+```
+
+```{r}
+###############################################################
+# Basic parameters
+###############################################################
+# Range of levels t in [0, T]
+T=3
+# Number of directions v in S^1
+number_directions=4
+# Number of levels t in [0, T]
+grid_length=50
+# Number of simulated shapes in each collection
+number_iterations=100
+# The thickness of shapes 
+R=0.2
+# Variance of the random axis lengths
+radius_variance=0.05
+# Number of simulation studies
+number_studies=100
+# The parameter determining the distribution P^{(epsilon)}
+epsilon=0.05
+# Expected type-one error rate
+alpha_type_one_er=0.05
+I=100
+```
+
+```{r}
+###############################################################
+# Input directions/levels
+###############################################################
+S_1_parameters=seq(from=0, to=2*pi, length.out = number_directions+1)
+directions_function=function(t){ return(c(cos(t), sin(t))) }
+directions_matrix=matrix(NA, ncol = 2, nrow = number_directions+1)
+for (i in 1:(number_directions+1)) { directions_matrix[i,]=directions_function(S_1_parameters[i]) }
+directions_matrix=directions_matrix[-(number_directions+1),]
+t_grid=seq(from=0, to=T, length.out = grid_length)
+rejection_indicators=vector()
+```
+
+
+
+
+
+```{r}
+###############################################################
+# Simulations
+###############################################################
+chisq_statistic_seq=vector()
+df_seq=vector()
+p_value_seq=vector()
+#time=vector()
+###############################################################
+#Create a set of copies of R running in parallel 
+#and communicating over sockets. You need to use detectCores()
+#to detect the number of CPU cores before this step
+###############################################################
+cl <- makeCluster(16)
+registerDoParallel(cl)
+#for (index_time in 1:20) {
+###############################################################
+#We simulate 20 different datasets for 
+#each combination of parameter values
+###############################################################
+#t1<-Sys.time()
+for (studies in 1:number_studies) {
+  ###############################################################
+  ### Generate SECT for the 1st collection
+  ###############################################################
+  
+ECT_both_list=list()
+  
+  ECT_1_original_list=list()
+  
+  ECT_1_original_list=foreach(iterations = 1:number_iterations, .packages = c("TDA")) %dopar% {
+    
+    #print(paste("The 1st collection, Iteration No.: ", as.character(iterations)))
+    
+    # Experimental data generating
+    a=rnorm(1, mean = 1, sd=radius_variance)
+    b=rnorm(1, mean = 1, sd=radius_variance)
+    t=seq(from=0.2*pi, to=1.8*pi, length.out = I)
+    manifold=function(t){ return(c(0.4+a*cos(t), b*sin(t)))}
+    X=manifold(t)
+    sd.noise=0
+    e1=rnorm(I,mean = 0, sd=sd.noise)
+    e2=rnorm(I,mean = 0, sd=sd.noise)
+    data.points_1=X+cbind(e1,e2)  
+    a=rnorm(1, mean = 1, sd=radius_variance)
+    b=rnorm(1, mean = 1, sd=radius_variance)
+    t=seq(from=1.2*pi, to=2.8*pi, length.out = I)
+    manifold=function(t){ return(c(-0.4+a*cos(t), b*sin(t)))}
+    X=manifold(t)
+    sd.noise=0
+    e1=rnorm(I,mean = 0, sd=sd.noise)
+    e2=rnorm(I,mean = 0, sd=sd.noise)
+    data.points_2=X+cbind(e1,e2)  
+    data.points=rbind(data.points_1, data.points_2)
+    
+    
+    # Computing ECT/PECT/SECT
+    
+    t_grid=seq(from=0, to=T, length.out = grid_length)
+    
+    ECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (k in 1:number_directions) {
+      
+      Betti_numbers_matrix=matrix(0, ncol = 2, nrow = grid_length)
+      for (i in 1:grid_length) {
+        
+        direction_k=as.matrix(directions_matrix[k,])
+        filtration_levels=data.points%*%direction_k
+        sublevel_indices=which(filtration_levels<(t_grid[i]-(T/2)))
+        points_of_interest=data.points[sublevel_indices,]
+        points_of_interest=as.matrix(points_of_interest)
+        if(dim(points_of_interest)[2]==1){points_of_interest=t(points_of_interest)}
+        if(dim(points_of_interest)[1]!=0){
+          alphaComplexDiag_results=alphaComplexDiag(points_of_interest, printProgress = FALSE)
+          alphaComplexDiag_results$diagram[,2:3]=sqrt(alphaComplexDiag_results$diagram[,2:3])
+          Betti_numbers=vector()
+          for (d in 0:(2-1)) {
+            Betti_numbers[d+1]=0
+            H=as.matrix(alphaComplexDiag_results$diagram[alphaComplexDiag_results$diagram[,1]==d,])
+            if(dim(H)[2]!=3){ H=t(H) }
+            if(dim(H)[1]!=0){
+              for (j in 1:dim(H)[1]) {
+                if( (H[j,2]<=R) & (H[j,3]>R) ){ Betti_numbers[d+1]=Betti_numbers[d+1]+1 }
+              } 
+            }
+          }
+          
+          Betti_numbers_matrix[i, ]=Betti_numbers  
+          
+        }  
+      }
+      
+      ECT[,k]=Betti_numbers_matrix[,1]-Betti_numbers_matrix[,2]
+      
+    }
+    
+    
+    ECT_1_original_list[[iterations]]=ECT
+  }
+  
+  
+  ###############################################################
+  ### Generate SECT for the 2nd collection
+  ###############################################################
+  
+ECT_2_original_list=list()
+  
+  ECT_2_original_list=foreach(iterations = 1:number_iterations, .packages = c("TDA")) %dopar% {
+    
+    # Experimental data generating
+    a=rnorm(1, mean = 1, sd=radius_variance)
+    b=rnorm(1, mean = 1, sd=radius_variance)
+    I=100
+    
+    #########################################################
+    t=seq(from=((1-epsilon)/5)*pi, to=((9+epsilon)/5)*pi, length.out = I)
+    #########################################################
+    
+    manifold=function(t){ return(c(0.4+a*cos(t), b*sin(t)))}
+    X=manifold(t)
+    sd.noise=0
+    e1=rnorm(I,mean = 0, sd=sd.noise)
+    e2=rnorm(I,mean = 0, sd=sd.noise)
+    data.points_1=X+cbind(e1,e2)  
+    a=rnorm(1, mean = 1, sd=radius_variance)
+    b=rnorm(1, mean = 1, sd=radius_variance)
+    t=seq(from=1.2*pi, to=2.8*pi, length.out = I)
+    manifold=function(t){ return(c(-0.4+a*cos(t), b*sin(t)))}
+    X=manifold(t)
+    sd.noise=0
+    e1=rnorm(I,mean = 0, sd=sd.noise)
+    e2=rnorm(I,mean = 0, sd=sd.noise)
+    data.points_2=X+cbind(e1,e2)  
+    data.points=rbind(data.points_1, data.points_2)
+    
+    
+    # Computing ECT/PECT/SECT
+    
+    t_grid=seq(from=0, to=T, length.out = grid_length)
+    
+    ECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (k in 1:number_directions) {
+      
+      Betti_numbers_matrix=matrix(0, ncol = 2, nrow = grid_length)
+      for (i in 1:grid_length) {
+        
+        direction_k=as.matrix(directions_matrix[k,])
+        filtration_levels=data.points%*%direction_k
+        sublevel_indices=which(filtration_levels<(t_grid[i]-(T/2)))
+        points_of_interest=data.points[sublevel_indices,]
+        points_of_interest=as.matrix(points_of_interest)
+        if(dim(points_of_interest)[2]==1){points_of_interest=t(points_of_interest)}
+        if(dim(points_of_interest)[1]!=0){
+          alphaComplexDiag_results=alphaComplexDiag(points_of_interest, printProgress = FALSE)
+          alphaComplexDiag_results$diagram[,2:3]=sqrt(alphaComplexDiag_results$diagram[,2:3])
+          Betti_numbers=vector()
+          for (d in 0:(2-1)) {
+            Betti_numbers[d+1]=0
+            H=as.matrix(alphaComplexDiag_results$diagram[alphaComplexDiag_results$diagram[,1]==d,])
+            if(dim(H)[2]!=3){ H=t(H) }
+            if(dim(H)[1]!=0){
+              for (j in 1:dim(H)[1]) {
+                if( (H[j,2]<=R) & (H[j,3]>R) ){ Betti_numbers[d+1]=Betti_numbers[d+1]+1 }
+              } 
+            }
+          }
+          
+          Betti_numbers_matrix[i, ]=Betti_numbers  
+          
+        }  
+      }
+      
+      ECT[,k]=Betti_numbers_matrix[,1]-Betti_numbers_matrix[,2]
+      
+    }
+    
+    
+    ECT_2_original_list[[iterations]]=ECT
+  }
+ ECT_both_list= c(ECT_1_original_list, ECT_2_original_list)
+euclidean <- function(a, b) (sqrt(sum((a - b)^2)))
+F_statistic_original = 0
+F_matrix=matrix(0, ncol = number_iterations*2, nrow = number_iterations*2)
+dir_sup=matrix(0, ncol = number_directions, nrow = 1)
+for (i in 1:(number_iterations*2)) {
+  ECTk = ECT_both_list[[i]]
+  for (j in 1:(number_iterations*2)) {
+    ECTl = ECT_both_list[[j]]
+     for (m in 1:number_directions) {
+      dir_sup[1,m]=euclidean(ECTk[,m],ECTl[,m])
+     }
+    F_matrix[i,j]=max(dir_sup)
+  }}
+for (i in 1:number_iterations) {
+for (j in 1:number_iterations) { F_statistic_original = F_statistic_original + F_matrix[i,j] +　F_matrix[i+100,j+100]}}
+  
+  ###############################################################
+  ### Permutation test
+  ###############################################################
+  
+  number_permutations=1000
+  ECT_1_list=list()
+  ECT_2_list=list()
+  F_statistic_seq=vector()
+  
+  for (perm in 1:number_permutations) {
+    
+    all_indices=1:(2*number_iterations)
+    sampled_indices=sample(all_indices, size=number_iterations, replace = FALSE)
+    unsampled_indices=all_indices[-sampled_indices]
+#    for (i in 1:number_iterations) {
+#      ECT_1_list[[i]]=ECT_both_list[[sampled_indices[i]]]
+#      ECT_2_list[[i]]=ECT_both_list[[unsampled_indices[i]]]
+#    }
+    
+F=0   
+for (i in 1:number_iterations) {
+for (j in 1:number_iterations) { F = F + F_matrix[sampled_indices[i],sampled_indices[j]] +　F_matrix[unsampled_indices[i],unsampled_indices[j]]}}
+F_statistic_seq[perm]=F
+ }
+  
+  decreasing_F_stat=sort(F_statistic_seq,decreasing=TRUE)
+  rejection_indicators[studies]=F_statistic_original<decreasing_F_stat[number_permutations-floor(alpha_type_one_er*number_permutations)]
+  
+}
+#t2<-Sys.time()
+#time=t1-t2
+#}
+###############################################################
+### close the implicitly created cluster
+###############################################################
+stopImplicitCluster()
+stopCluster(cl)
+```
+
+```{r}
+#mean(time)
+#sd(time)
+mean(rejection_indicators)
+```

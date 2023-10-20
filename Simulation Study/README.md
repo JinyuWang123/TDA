@@ -3,7 +3,7 @@ Refer to section 6 of the manuscript
 ## Organization
 
 ### Code for table1
-Code-table1 produces the results displayed in Table 1.
+[Code-table1](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code-table1) produces the results displayed in Table 1.
 ### Code for table4
 Code-table4 produces the results displayed in Table 4.
 ### Code for table5

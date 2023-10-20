@@ -1,7 +1,8 @@
 # Simulation Study
-Refer to section 5 of the manuscript
-## Purpose
-The purpose of this section is to provide the exact scripts/code used to produce to the simulation results in the manuscript.
+Refer to section 6 of the manuscript
+## Organization
+### simulation-code
+
 ## Package Details and Requirements
 The statistical implementation of the simulation study requires the installation of the following important R libraries (we can [install R packages from the command line](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Installing-packages)):
 * [TDA](https://cran.r-project.org/web/packages/TDA/index.html)
@@ -23,7 +24,4 @@ For example, the number of cores my computer can use is 16, so I use the followi
 cl <- makeCluster(16)
 registerDoParallel(cl)
 ```
-## Additional Information
-1. "Algorithm 1.Rmd": This file provides the source code of the simulation studies showing the performance of Algorithm 1 proposed in MCE.
-2. "Algorithm 2.Rmd": This file provides the source code of the simulation studies showing the performance of Algorithm 2 proposed in MCE.
-3. "Algorithm 3.Rmd": This file provides the source code of the simulation studies showing the performance of Algorithm 3 proposed in MCE.
+

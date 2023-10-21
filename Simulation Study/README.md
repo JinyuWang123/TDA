@@ -5,7 +5,7 @@ Refer to section 6 of the manuscript
 ### Code for table1
 [Code-table1](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code-table1) produces the results displayed in Table 1.
 ### Code for table4
-[Code-table4](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code-table4) produces the results displayed in Table 4.
+[Code-table4](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table4) produces the results displayed in Table 4.
 ### Code for table5
 Code-table5 produces the results displayed in Table 5.
 ### Code for table6

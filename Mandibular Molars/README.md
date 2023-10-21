@@ -26,7 +26,7 @@ We consider a data set of mandibular molars from two suborders of primates -- Ha
 Other details of our implementation choices for the algorithm are provided below.
 ### Align the ECCSs
 Refer to [Code-Figure1](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_Figure1)
-Before applying Algorithms 1 and 2, we performed the ECT on the raw data and normalized the polygon meshes by aligning the ECCs. The details of the ECT-based alignment procedure are given in [Wang et al. (2021)](https://projecteuclid.org/journals/annals-of-applied-statistics/volume-15/issue-2/A-statistical-pipeline-for-identifying-physical-features-that-differentiate-classes/10.1214/20-AOAS1430.full) (particularly, Section 4 of its Supplementary Material). The aligned molars are presented in Figure 1. To reproduce the Figure 1, we can run the [Fig1.R](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Fig1.R).
+
 ### Computed its ECT
 For each shape in Fig. 6, first we computed its ECT. Specifically, we computed the ECCs for 2918 directions; in each direction, we used 100 sublevels. To reproduce this process, we need to run the file [ECT_computation.Rmd](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/ECT_computation.Rmd). The calculated ECT data will be stored in [alignment_ECT](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/alignment_ECT).
 ### Compute the SECT and Conduct Hypothesis test

@@ -3,7 +3,7 @@ Refer to section 7 of the manuscript
 ## Organization
 
 ### Code for table2
-[Code-table2](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code-table1) produces the results displayed in Table 2.
+[Code-table2](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_table2) produces the results displayed in Table 2.
 ### Code for Figure 1
 [Code-Figure1](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_Figure1) produces the results displayed in Figure 1.
 ## Package Details and Requirements

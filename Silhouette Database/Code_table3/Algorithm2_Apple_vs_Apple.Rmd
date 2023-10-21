@@ -1,0 +1,261 @@
+---
+title: "Untitled"
+output: html_document
+date: "2023-01-06"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+cat("\014")
+
+### Clear Environment ### 
+rm(list = ls(all = TRUE))
+
+```
+
+```{r}
+load("C:/Users/wjyjy/Documents/TDA/Silhouette Database/Data/MRIECs.RData")
+```
+
+```{r}
+library(foreach)
+library(doParallel)
+library(iterators)
+data_1_list=MRI_list
+number_iterations =20
+number_directions = 72
+grid_length = 100
+T=3
+```
+
+```{r}
+ECT_list=list()
+for (i in 1:20) {
+  ECT_list[[i]]=data_1_list[[i]]$EC[-101,]
+}
+
+```
+
+```{r}
+    t_grid=seq(from=0, to=T, length.out = grid_length)
+    SECT_list=list()
+    ECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (iterations in 1:number_iterations) {
+      
+    ECT_2D_results=ECT_list[[iterations]]
+    PECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (i in 1:dim(ECT_2D_results)[2]) {
+      PECT[,i]=(T/grid_length)*cumsum(ECT_2D_results[,i])
+    }
+    
+    PECT_2D_results=PECT
+    SECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (i in 1:dim(PECT_2D_results)[2]) {
+      SECT[,i]=PECT_2D_results[,i]-(PECT_2D_results[dim(PECT_2D_results)[1],i]/T)*t_grid
+    }
+    
+    SECT_list[[iterations]]=SECT
+  }
+```
+
+
+
+```{r}
+cl <- makeCluster(16)
+registerDoParallel(cl)
+number_permutations=100
+
+  SECT_1_original_list=list()
+  SECT_2_original_list=list()
+  chisq_statistic_seq=vector()
+  SECT_both_list = SECT_list
+  number_iterations=10
+    
+  p_value_seq=list()
+  p_value_seq <- foreach(perm = 1:number_permutations) %dopar% {
+    
+    all_indices=1:(2*number_iterations)
+    sampled_indices=sample(all_indices, size=number_iterations, replace = FALSE)
+    unsampled_indices=all_indices[-sampled_indices]
+    for (i in 1:number_iterations) {
+      SECT_1_original_list[[i]]=SECT_both_list[[sampled_indices[i]]]
+      SECT_2_original_list[[i]]=SECT_both_list[[unsampled_indices[i]]]
+    }
+  
+     M_1=SECT_1_original_list[[1]]
+  for (i in 2:number_iterations) {
+    M_1=M_1+SECT_1_original_list[[i]]
+  }
+  M_1=(1/number_iterations)*M_1
+  M_2=SECT_2_original_list[[1]]
+  for (i in 2:number_iterations) {
+    M_2=M_2+SECT_2_original_list[[i]]
+  }
+  M_2=(1/number_iterations)*M_2
+  
+  
+  ###############################################################
+  ### Select the distinguishing direction
+  ###############################################################
+  
+  supnorm=vector()
+  for (directions in 1:number_directions) {
+    supnorm[directions]=max(abs(M_1[,directions]-M_2[,directions]))
+  }
+  distinguishing_direction_index=max(which.max(supnorm))
+  
+  
+  ###############################################################
+  ### Karhunen-Loeve decomposition
+  ###############################################################
+  
+  SECT_1_distinguishing_direction=matrix(NA, ncol = number_iterations, nrow = grid_length)
+  for (i in 1:number_iterations) {
+    SECT_1_distinguishing_direction[,i]=SECT_1_original_list[[i]][, distinguishing_direction_index]
+  }
+  SECT_2_distinguishing_direction=matrix(NA, ncol = number_iterations, nrow = grid_length)
+  for (i in 1:number_iterations) {
+    SECT_2_distinguishing_direction[,i]=SECT_2_original_list[[i]][, distinguishing_direction_index]
+  }
+  
+  demean_all=matrix(NA, ncol = 2*number_iterations, nrow = grid_length)
+  for (i in 1:number_iterations) {
+    demean_all[,i]=SECT_1_distinguishing_direction[,i]-M_1[, distinguishing_direction_index]
+  }
+  for (i in 1:number_iterations) {
+    demean_all[,number_iterations+i]=SECT_2_distinguishing_direction[,i]-M_2[, distinguishing_direction_index]
+  }
+  
+  CovKer=cov(t(demean_all))
+  eigen_results=eigen(CovKer)
+  result <- pmax(eigen_results$values, 0)
+
+  # We only care about the components having 99% cumulative variance.
+  L_original=max(which(cumsum(result)/sum(result)<0.99))
+  L=L_original
+  Eigen_values=(T/grid_length)*result[1:L]
+  Eigen_vectors=sqrt(grid_length/T)*eigen_results$vectors[,1:L]
+  
+  Xis=matrix(NA, ncol = L, nrow = number_iterations)
+  for (i in 1:number_iterations) {
+    Xi=vector()
+    for (l in 1:L) {
+      Xi[l]=(1/sqrt(2*Eigen_values[l]))*(T/grid_length)*sum((SECT_1_distinguishing_direction[,i]-SECT_2_distinguishing_direction[,i])*Eigen_vectors[,l])
+    }
+    Xis[i,]=Xi
+  }
+  
+  chisq_statistic_original=sum((sqrt(number_iterations)*apply(Xis, 2, mean))^2)
+  
+  
+  ###############################################################
+  ### Permutation test
+  ###############################################################
+  
+  number_permutations_2=1000
+  SECT_1_list=list()
+  SECT_2_list=list()
+  chisq_statistic_seq=vector()
+  
+  for (permu in 1:number_permutations_2) {
+    
+    all_indices=1:(2*number_iterations)
+    sampled_indices=sample(all_indices, size=number_iterations, replace = FALSE)
+    unsampled_indices=all_indices[-sampled_indices]
+    for (i in 1:number_iterations) {
+      SECT_1_list[[i]]=SECT_both_list[[sampled_indices[i]]]
+      SECT_2_list[[i]]=SECT_both_list[[unsampled_indices[i]]]
+    }
+    
+    
+    ###############################################################
+    ### Compute the mean functions of the two SECT collections
+    ###############################################################
+    
+    M_1=SECT_1_list[[1]]
+    for (i in 2:number_iterations) {
+      M_1=M_1+SECT_1_list[[i]]
+    }
+    M_1=(1/number_iterations)*M_1
+    M_2=SECT_2_list[[1]]
+    for (i in 2:number_iterations) {
+      M_2=M_2+SECT_2_list[[i]]
+    }
+    M_2=(1/number_iterations)*M_2
+    
+    
+    ###############################################################
+    ### Select the distinguishing direction
+    ###############################################################
+    
+    supnorm=vector()
+    for (directions in 1:number_directions) {
+      supnorm[directions]=max(abs(M_1[,directions]-M_2[,directions]))
+    }
+    distinguishing_direction_index=max(which.max(supnorm))
+    
+    
+    ###############################################################
+    ### Karhunen-Loeve decomposition
+    ###############################################################
+    
+    SECT_1_distinguishing_direction=matrix(NA, ncol = number_iterations, nrow = grid_length)
+    for (i in 1:number_iterations) {
+      SECT_1_distinguishing_direction[,i]=SECT_1_list[[i]][, distinguishing_direction_index]
+    }
+    SECT_2_distinguishing_direction=matrix(NA, ncol = number_iterations, nrow = grid_length)
+    for (i in 1:number_iterations) {
+      SECT_2_distinguishing_direction[,i]=SECT_2_list[[i]][, distinguishing_direction_index]
+    }
+    
+    demean_all=matrix(NA, ncol = 2*number_iterations, nrow = grid_length)
+    for (i in 1:number_iterations) {
+      demean_all[,i]=SECT_1_distinguishing_direction[,i]-M_1[, distinguishing_direction_index]
+    }
+    for (i in 1:number_iterations) {
+      demean_all[,number_iterations+i]=SECT_2_distinguishing_direction[,i]-M_2[, distinguishing_direction_index]
+    }
+    
+    CovKer=cov(t(demean_all))
+    eigen_results=eigen(CovKer)
+    result <- pmax(eigen_results$values, 0)
+
+    # We only care about the components having 99% cumulative variance.
+    L=L_original
+    Eigen_values=(T/grid_length)*result[1:L]
+    Eigen_vectors=sqrt(grid_length/T)*eigen_results$vectors[,1:L]
+    
+    Xis=matrix(NA, ncol = L, nrow = number_iterations)
+    for (i in 1:number_iterations) {
+      Xi=vector()
+      for (l in 1:L) {
+        Xi[l]=(1/sqrt(2*Eigen_values[l]))*(T/grid_length)*sum((SECT_1_distinguishing_direction[,i]-SECT_2_distinguishing_direction[,i])*Eigen_vectors[,l])
+      }
+      Xis[i,]=Xi
+    }
+    
+    chisq_statistic_seq[permu]=sum((sqrt(number_iterations)*apply(Xis, 2, mean))^2)
+    
+  }
+  
+  increasing_chisq_stat=sort(chisq_statistic_seq)
+  p_value_seq[[perm]]=1-(which(increasing_chisq_stat>chisq_statistic_original)[1])/1000
+  }
+    stopImplicitCluster()
+  stopCluster(cl)
+```
+
+```{r}
+p_value_final=vector()
+for (i in 1:100) {
+  p_value_final[i]=p_value_seq[[i]]
+}
+```
+
+```{r}
+mean(p_value_final)
+sd(p_value_final)
+```

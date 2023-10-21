@@ -5,7 +5,7 @@ Refer to section 7 of the manuscript
 ### Code for table2
 [Code-table2](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code-table1) produces the results displayed in Table 2.
 ### Code for Figure 1
-[Code-Figure1](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code-table1) produces the results displayed in Figure 1.
+[Code-Figure1](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_Figure1) produces the results displayed in Figure 1.
 ## Package Details and Requirements
 The statistical implementation of the simulation study requires the installation of the following important R libraries (we can [install R packages from the command line](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Installing-packages)):
 * [Rvcg](https://cran.r-project.org/web/packages/Rvcg/index.html)

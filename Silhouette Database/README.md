@@ -2,8 +2,8 @@
 Refer to Appendix I of the manuscript
 ## Organization
 
-### Code for table1
-[Code-table1](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code-table1) produces the results displayed in Table 1.
+### Code for table3
+[Code-table1](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code-table1) produces the results displayed in Table 3.
 ## Package Details and Requirements
 The statistical implementation of the simulation study requires the installation of the following important R libraries (we can [install R packages from the command line](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Installing-packages)):
 * [BGLR](https://cran.r-project.org/web/packages/BGLR/index.html)

@@ -1,5 +1,5 @@
 # Silhouette Database
-Refer to section 6.1 of the manuscript
+Refer to Appendix I of the manuscript
 ## Purpose
 The purpose of this section is to provide the exact scripts/code used to produce to the real data results in the manuscript.
 ## Package Details and Requirements

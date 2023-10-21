@@ -7,7 +7,7 @@ Refer to section 6 of the manuscript
 ### Code for table4
 [Code-table4](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table4) produces the results displayed in Table 4.
 ### Code for table5
-Code-table5 produces the results displayed in Table 5.
+[Code-table5](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table5) produces the results displayed in Table 5.
 ### Code for table6
 Code-table6 produces the results displayed in Table 6.
 ## Package Details and Requirements

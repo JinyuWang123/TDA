@@ -14,6 +14,8 @@ If you want to run a single RMD file to generate table1, please run [overall_tab
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code-table1/overall_table1.Rmd)
 ### Code for table2
 [Code-table2](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_table2) produces the results displayed in Table 2.
+If you want to run a single RMD file to generate table1, please run [overall_table2.Rmd
+](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Code_table2/overall_table2.Rmd)
 ### Code for table3
 [Code-table3](https://github.com/JinyuWang123/TDA/tree/main/Silhouette%20Database/Code_table3) produces the results displayed in Table 3.
 ### Code for table4

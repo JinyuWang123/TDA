@@ -25,6 +25,8 @@ If you want to run a single RMD file to generate table1, please run [overall_tab
 
 ### Code for Figure 1
 [Code-Figure1](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_Figure1) produces the results displayed in Figure 1.
+If you want to run a single RMD file to generate table1, please run [Fig1.R
+](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Code_Figure1/Fig1.R)
 
 ## The R Environment
 Code for this manuscript was run in R (version 4.2, Compatible with version 3.6 - 4.2). R is a widely used, free, and open source software environment for statistical computing and graphics. The most recent version of R can be downloaded from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/). For specific details on how to compile, install, and manage R and R-packages, refer to the manual [R Installation and Administration](https://cran.r-project.org/doc/manuals/r-release/R-admin.html).

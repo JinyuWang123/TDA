@@ -1,0 +1,767 @@
+---
+title: "Untitled"
+output: html_document
+date: "2023-01-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+cat("\014")
+rm(list = ls(all = TRUE))
+```
+```{r}
+table_data <- data.frame(
+  Comparisons = c("Tarsius vs. Microcebus", "Tarsius vs. Mirza", "Tarsius vs. Saimiri",
+                  "Microcebus vs. Mirza", "Microcebus vs. Saimiri", "Mirza vs. Saimiri",
+                  "Tarsius vs. Tarsius"),
+  Algorithm_1 = NA_character_,
+  Algorithm_2 = NA_character_,
+  Algorithm_4 = NA_character_
+)
+library(foreach)
+library(doParallel)
+library(iterators)
+```
+
+
+
+```{r}
+cl <- makeCluster(16)
+registerDoParallel(cl)
+
+load("C:/Users/wjyjy/Documents/TDA/Mandibular Molars/alignment_ECT/Tarsius.RData")
+Tarsius = data
+load("C:/Users/wjyjy/Documents/TDA/Mandibular Molars/alignment_ECT/Microcebus.RData")
+Microcebus = data
+
+number_iterations =11
+number_directions = 2918
+grid_length = 200
+T=3
+
+ECT_1_list=list()
+for (i in 1:number_iterations) {
+  ECT_1_list[[i]]=t(Tarsius[[i]])
+}
+
+ECT_2_list=list()
+for (i in 1:number_iterations) {
+  ECT_2_list[[i]]=t(Microcebus[[i]])
+}
+
+    t_grid=seq(from=0, to=T, length.out = grid_length)
+    SECT_1_list=list()
+    ECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (iterations in 1:number_iterations) {
+    
+    
+    ECT_2D_results=ECT_1_list[[iterations]]
+    PECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (i in 1:dim(ECT_2D_results)[2]) {
+      PECT[,i]=(T/grid_length)*cumsum(ECT_2D_results[,i])
+    }
+    
+    PECT_2D_results=PECT
+    SECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (i in 1:dim(PECT_2D_results)[2]) {
+      SECT[,i]=PECT_2D_results[,i]-(PECT_2D_results[dim(PECT_2D_results)[1],i]/T)*t_grid
+    }
+    
+    SECT_1_list[[iterations]]=SECT
+  }
+
+    t_grid=seq(from=0, to=T, length.out = grid_length)
+    SECT_2_list=list()
+    ECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (iterations in 1:number_iterations) {
+    
+    
+    ECT_2D_results=ECT_2_list[[iterations]]
+    PECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (i in 1:dim(ECT_2D_results)[2]) {
+      PECT[,i]=(T/grid_length)*cumsum(ECT_2D_results[,i])
+    }
+    
+    PECT_2D_results=PECT
+    SECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (i in 1:dim(PECT_2D_results)[2]) {
+      SECT[,i]=PECT_2D_results[,i]-(PECT_2D_results[dim(PECT_2D_results)[1],i]/T)*t_grid
+    }
+    
+    SECT_2_list[[iterations]]=SECT
+  }
+
+  ###############################################################
+  ### Compute the mean functions of the two SECT collections
+  ###############################################################
+  
+  M_1=SECT_1_list[[1]]
+  for (i in 2:number_iterations) {
+    M_1=M_1+SECT_1_list[[i]]
+  }
+  M_1=(1/number_iterations)*M_1
+  M_2=SECT_2_list[[1]]
+  for (i in 2:number_iterations) {
+    M_2=M_2+SECT_2_list[[i]]
+  }
+  M_2=(1/number_iterations)*M_2
+  
+  
+  ###############################################################
+  ### Select the distinguishing direction
+  ###############################################################
+  
+  supnorm=vector()
+  for (directions in 1:number_directions) {
+    supnorm[directions]=max(abs(M_1[,directions]-M_2[,directions]))
+  }
+  distinguishing_direction_index=max(which.max(supnorm))
+  
+  
+  ###############################################################
+  ### Karhunen-Loeve decomposition
+  ###############################################################
+  
+  SECT_1_distinguishing_direction=matrix(NA, ncol = number_iterations, nrow = grid_length)
+  for (i in 1:number_iterations) {
+    SECT_1_distinguishing_direction[,i]=SECT_1_list[[i]][, distinguishing_direction_index]
+  }
+  SECT_2_distinguishing_direction=matrix(NA, ncol = number_iterations, nrow = grid_length)
+  for (i in 1:number_iterations) {
+    SECT_2_distinguishing_direction[,i]=SECT_2_list[[i]][, distinguishing_direction_index]
+  }
+  
+  demean_all=matrix(NA, ncol = 2*number_iterations, nrow = grid_length)
+  for (i in 1:number_iterations) {
+    demean_all[,i]=SECT_1_distinguishing_direction[,i]-M_1[, distinguishing_direction_index]
+  }
+  for (i in 1:number_iterations) {
+    demean_all[,number_iterations+i]=SECT_2_distinguishing_direction[,i]-M_2[, distinguishing_direction_index]
+  }
+  
+  CovKer=cov(t(demean_all))
+  eigen_results=eigen(CovKer)
+  result <- pmax(eigen_results$values, 0)
+
+  # We only care about the components having 95% cumulative variance.
+  L=max(which(cumsum(result)/sum(result)<0.98))
+  Eigen_values=(T/grid_length)*result[1:L]
+  Eigen_vectors=sqrt(grid_length/T)*eigen_results$vectors[,1:L]
+  
+  Xis=matrix(NA, ncol = L, nrow = number_iterations)
+  for (i in 1:number_iterations) {
+    Xi=vector()
+    for (l in 1:L) {
+      Xi[l]=(1/sqrt(2*Eigen_values[l]))*(T/grid_length)*sum((SECT_1_distinguishing_direction[,i]-SECT_2_distinguishing_direction[,i])*Eigen_vectors[,l])
+    }
+    Xis[i,]=Xi
+  }
+  
+  chisq_statistic_seq=sum((sqrt(number_iterations)*apply(Xis, 2, mean))^2)
+  df_seq=L
+  p_value_seq=1-pchisq(sum((sqrt(number_iterations)*apply(Xis, 2, mean))^2), df=L)
+  
+
+table_data[1,2]=p_value_seq
+
+
+load("C:/Users/wjyjy/Documents/TDA/Mandibular Molars/alignment_ECT/Tarsius.RData")
+Tarsius = data
+
+ECT_list=list()
+for (i in 1:28) {
+  ECT_list[[i]]=t(Tarsius[[i]])
+}
+
+number_iterations =28
+number_directions = 2918
+grid_length = 200
+T=3
+
+    t_grid=seq(from=0, to=T, length.out = grid_length)
+    SECT_list=list()
+    ECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (iterations in 1:number_iterations) {
+    
+    
+    ECT_2D_results=ECT_list[[iterations]]
+    PECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (i in 1:dim(ECT_2D_results)[2]) {
+      PECT[,i]=(T/grid_length)*cumsum(ECT_2D_results[,i])
+    }
+    
+    PECT_2D_results=PECT
+    SECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (i in 1:dim(PECT_2D_results)[2]) {
+      SECT[,i]=PECT_2D_results[,i]-(PECT_2D_results[dim(PECT_2D_results)[1],i]/T)*t_grid
+    }
+    
+    SECT_list[[iterations]]=SECT
+  }
+
+
+
+number_permutations=100
+
+  SECT_1_list=list()
+  SECT_2_list=list()
+  chisq_statistic_seq=vector()
+  SECT_both_list = SECT_list
+  number_iterations=14
+
+  p_value_seq=list()
+  p_value_seq <- foreach(perm = 1:number_permutations) %dopar% {
+    
+    all_indices=1:(2*number_iterations)
+    sampled_indices=sample(all_indices, size=number_iterations, replace = FALSE)
+    unsampled_indices=all_indices[-sampled_indices]
+    for (i in 1:number_iterations) {
+      SECT_1_list[[i]]=SECT_both_list[[sampled_indices[i]]]
+      SECT_2_list[[i]]=SECT_both_list[[unsampled_indices[i]]]
+    }
+    M_1=SECT_1_list[[1]]
+  for (i in 2:number_iterations) {
+    M_1=M_1+SECT_1_list[[i]]
+  }
+  M_1=(1/number_iterations)*M_1
+  M_2=SECT_2_list[[1]]
+  for (i in 2:number_iterations) {
+    M_2=M_2+SECT_2_list[[i]]
+  }
+  M_2=(1/number_iterations)*M_2
+  
+  
+  ###############################################################
+  ### Select the distinguishing direction
+  ###############################################################
+  
+  supnorm=vector()
+  for (directions in 1:number_directions) {
+    supnorm[directions]=max(abs(M_1[,directions]-M_2[,directions]))
+  }
+  distinguishing_direction_index=max(which.max(supnorm))
+  
+  
+  ###############################################################
+  ### Karhunen-Loeve decomposition
+  ###############################################################
+  
+  SECT_1_distinguishing_direction=matrix(NA, ncol = number_iterations, nrow = grid_length)
+  for (i in 1:number_iterations) {
+    SECT_1_distinguishing_direction[,i]=SECT_1_list[[i]][, distinguishing_direction_index]
+  }
+  SECT_2_distinguishing_direction=matrix(NA, ncol = number_iterations, nrow = grid_length)
+  for (i in 1:number_iterations) {
+    SECT_2_distinguishing_direction[,i]=SECT_2_list[[i]][, distinguishing_direction_index]
+  }
+  
+  demean_all=matrix(NA, ncol = 2*number_iterations, nrow = grid_length)
+  for (i in 1:number_iterations) {
+    demean_all[,i]=SECT_1_distinguishing_direction[,i]-M_1[, distinguishing_direction_index]
+  }
+  for (i in 1:number_iterations) {
+    demean_all[,number_iterations+i]=SECT_2_distinguishing_direction[,i]-M_2[, distinguishing_direction_index]
+  }
+  
+  CovKer=cov(t(demean_all))
+  eigen_results=eigen(CovKer)
+  result <- pmax(eigen_results$values, 0)
+
+  # We only care about the components having 99% cumulative variance.
+  L=max(which(cumsum(result)/sum(result)<0.99))
+  Eigen_values=(T/grid_length)*result[1:L]
+  Eigen_vectors=sqrt(grid_length/T)*eigen_results$vectors[,1:L]
+  
+  Xis=matrix(NA, ncol = L, nrow = number_iterations)
+  for (i in 1:number_iterations) {
+    Xi=vector()
+    for (l in 1:L) {
+      Xi[l]=(1/sqrt(2*Eigen_values[l]))*(T/grid_length)*sum((SECT_1_distinguishing_direction[,i]-SECT_2_distinguishing_direction[,i])*Eigen_vectors[,l])
+    }
+    Xis[i,]=Xi
+  }
+  
+  chisq_statistic_seq=sum((sqrt(number_iterations)*apply(Xis, 2, mean))^2)
+  df_seq=L
+  p_value_seq[[perm]]=1-pchisq(sum((sqrt(number_iterations)*apply(Xis, 2, mean))^2), df=L)
+  }
+stopImplicitCluster()
+stopCluster(cl)
+
+p_value_final=vector()
+for (i in 1:100) {
+  p_value_final[i]=p_value_seq[[i]]
+}
+
+
+
+table_data[7,2] = mean(p_value_final)
+
+
+load("C:/Users/wjyjy/Documents/TDA/Mandibular Molars/alignment_ECT/Tarsius.RData")
+Tarsius = data
+load("C:/Users/wjyjy/Documents/TDA/Mandibular Molars/alignment_ECT/Microcebus.RData")
+Microcebus = data
+
+number_iterations =11
+number_directions = 2918
+grid_length = 200
+T=3
+
+ECT_1_list=list()
+for (i in 1:number_iterations) {
+  ECT_1_list[[i]]=t(Tarsius[[i]])
+}
+
+ECT_2_list=list()
+for (i in 1:number_iterations) {
+  ECT_2_list[[i]]=t(Microcebus[[i]])
+}
+
+    t_grid=seq(from=0, to=T, length.out = grid_length)
+    SECT_1_list=list()
+    ECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (iterations in 1:number_iterations) {
+    
+    
+    ECT_2D_results=ECT_1_list[[iterations]]
+    PECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (i in 1:dim(ECT_2D_results)[2]) {
+      PECT[,i]=(T/grid_length)*cumsum(ECT_2D_results[,i])
+    }
+    
+    PECT_2D_results=PECT
+    SECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (i in 1:dim(PECT_2D_results)[2]) {
+      SECT[,i]=PECT_2D_results[,i]-(PECT_2D_results[dim(PECT_2D_results)[1],i]/T)*t_grid
+    }
+    
+    SECT_1_list[[iterations]]=SECT
+  }
+
+    t_grid=seq(from=0, to=T, length.out = grid_length)
+    SECT_2_list=list()
+    ECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (iterations in 1:number_iterations) {
+    
+    
+    ECT_2D_results=ECT_2_list[[iterations]]
+    PECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (i in 1:dim(ECT_2D_results)[2]) {
+      PECT[,i]=(T/grid_length)*cumsum(ECT_2D_results[,i])
+    }
+    
+    PECT_2D_results=PECT
+    SECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (i in 1:dim(PECT_2D_results)[2]) {
+      SECT[,i]=PECT_2D_results[,i]-(PECT_2D_results[dim(PECT_2D_results)[1],i]/T)*t_grid
+    }
+    
+    SECT_2_list[[iterations]]=SECT
+  }
+
+SECT_1_original_list = SECT_1_list
+SECT_2_original_list = SECT_2_list
+SECT_both_list = c(SECT_1_list,SECT_2_list)
+ ###############################################################
+  ### Compute the mean functions of the two SECT collections
+  ###############################################################
+  
+  M_1=SECT_1_original_list[[1]]
+  for (i in 2:number_iterations) {
+    M_1=M_1+SECT_1_original_list[[i]]
+  }
+  M_1=(1/number_iterations)*M_1
+  M_2=SECT_2_original_list[[1]]
+  for (i in 2:number_iterations) {
+    M_2=M_2+SECT_2_original_list[[i]]
+  }
+  M_2=(1/number_iterations)*M_2
+  
+  
+  ###############################################################
+  ### Select the distinguishing direction
+  ###############################################################
+  
+  supnorm=vector()
+  for (directions in 1:number_directions) {
+    supnorm[directions]=max(abs(M_1[,directions]-M_2[,directions]))
+  }
+  distinguishing_direction_index=max(which.max(supnorm))
+  
+  
+  ###############################################################
+  ### Karhunen-Loeve decomposition
+  ###############################################################
+  
+  SECT_1_distinguishing_direction=matrix(NA, ncol = number_iterations, nrow = grid_length)
+  for (i in 1:number_iterations) {
+    SECT_1_distinguishing_direction[,i]=SECT_1_original_list[[i]][, distinguishing_direction_index]
+  }
+  SECT_2_distinguishing_direction=matrix(NA, ncol = number_iterations, nrow = grid_length)
+  for (i in 1:number_iterations) {
+    SECT_2_distinguishing_direction[,i]=SECT_2_original_list[[i]][, distinguishing_direction_index]
+  }
+  
+  demean_all=matrix(NA, ncol = 2*number_iterations, nrow = grid_length)
+  for (i in 1:number_iterations) {
+    demean_all[,i]=SECT_1_distinguishing_direction[,i]-M_1[, distinguishing_direction_index]
+  }
+  for (i in 1:number_iterations) {
+    demean_all[,number_iterations+i]=SECT_2_distinguishing_direction[,i]-M_2[, distinguishing_direction_index]
+  }
+  
+  CovKer=cov(t(demean_all))
+  eigen_results=eigen(CovKer)
+  result <- pmax(eigen_results$values, 0)
+
+  # We only care about the components having 95% cumulative variance.
+  L_original=max(which(cumsum(result)/sum(result)<0.98))
+  L=L_original
+  Eigen_values=(T/grid_length)*result[1:L]
+  Eigen_vectors=sqrt(grid_length/T)*eigen_results$vectors[,1:L]
+  
+  Xis=matrix(NA, ncol = L, nrow = number_iterations)
+  for (i in 1:number_iterations) {
+    Xi=vector()
+    for (l in 1:L) {
+      Xi[l]=(1/sqrt(2*Eigen_values[l]))*(T/grid_length)*sum((SECT_1_distinguishing_direction[,i]-SECT_2_distinguishing_direction[,i])*Eigen_vectors[,l])
+    }
+    Xis[i,]=Xi
+  }
+  
+  chisq_statistic_original=sum((sqrt(number_iterations)*apply(Xis, 2, mean))^2)
+  
+  
+  ###############################################################
+  ### Permutation test
+  ###############################################################
+  
+  number_permutations=1000
+  SECT_1_list=list()
+  SECT_2_list=list()
+  chisq_statistic_seq=vector()
+  
+  for (perm in 1:number_permutations) {
+    
+    all_indices=1:(2*number_iterations)
+    sampled_indices=sample(all_indices, size=number_iterations, replace = FALSE)
+    unsampled_indices=all_indices[-sampled_indices]
+    for (i in 1:number_iterations) {
+      SECT_1_list[[i]]=SECT_both_list[[sampled_indices[i]]]
+      SECT_2_list[[i]]=SECT_both_list[[unsampled_indices[i]]]
+    }
+    #SECT_1_list=SECT_1_original_list
+    #SECT_2_list=SECT_2_original_list
+    ###############################################################
+    ### Compute the mean functions of the two SECT collections
+    ###############################################################
+    
+    M_1=SECT_1_list[[1]]
+    for (i in 2:number_iterations) {
+      M_1=M_1+SECT_1_list[[i]]
+    }
+    M_1=(1/number_iterations)*M_1
+    M_2=SECT_2_list[[1]]
+    for (i in 2:number_iterations) {
+      M_2=M_2+SECT_2_list[[i]]
+    }
+    M_2=(1/number_iterations)*M_2
+    
+    
+    ###############################################################
+    ### Select the distinguishing direction
+    ###############################################################
+    
+    supnorm=vector()
+    for (directions in 1:number_directions) {
+      supnorm[directions]=max(abs(M_1[,directions]-M_2[,directions]))
+    }
+    distinguishing_direction_index=max(which.max(supnorm))
+    
+    
+    ###############################################################
+    ### Karhunen-Loeve decomposition
+    ###############################################################
+    
+    SECT_1_distinguishing_direction=matrix(NA, ncol = number_iterations, nrow = grid_length)
+    for (i in 1:number_iterations) {
+      SECT_1_distinguishing_direction[,i]=SECT_1_list[[i]][, distinguishing_direction_index]
+    }
+    SECT_2_distinguishing_direction=matrix(NA, ncol = number_iterations, nrow = grid_length)
+    for (i in 1:number_iterations) {
+      SECT_2_distinguishing_direction[,i]=SECT_2_list[[i]][, distinguishing_direction_index]
+    }
+    
+    demean_all=matrix(NA, ncol = 2*number_iterations, nrow = grid_length)
+    for (i in 1:number_iterations) {
+      demean_all[,i]=SECT_1_distinguishing_direction[,i]-M_1[, distinguishing_direction_index]
+    }
+    for (i in 1:number_iterations) {
+      demean_all[,number_iterations+i]=SECT_2_distinguishing_direction[,i]-M_2[, distinguishing_direction_index]
+    }
+    
+    CovKer=cov(t(demean_all))
+    eigen_results=eigen(CovKer)
+    result <- pmax(eigen_results$values, 0)
+
+    # We only care about the components having 95% cumulative variance.
+    L=L_original
+    Eigen_values=(T/grid_length)*result[1:L]
+    Eigen_vectors=sqrt(grid_length/T)*eigen_results$vectors[,1:L]
+    
+    Xis=matrix(NA, ncol = L, nrow = number_iterations)
+    for (i in 1:number_iterations) {
+      Xi=vector()
+      for (l in 1:L) {
+        Xi[l]=(1/sqrt(2*Eigen_values[l]))*(T/grid_length)*sum((SECT_1_distinguishing_direction[,i]-SECT_2_distinguishing_direction[,i])*Eigen_vectors[,l])
+      }
+      Xis[i,]=Xi
+    }
+    
+    chisq_statistic_seq[perm]=sum((sqrt(number_iterations)*apply(Xis, 2, mean))^2)
+    
+  }
+  
+  alpha_type_one_er = 0.05
+
+  increasing_chisq_stat=sort(chisq_statistic_seq)
+  rejection_indicators=chisq_statistic_original>increasing_chisq_stat[number_permutations-floor(alpha_type_one_er*number_permutations)]
+  if(chisq_statistic_original>increasing_chisq_stat[1000]){p_value=0}else{p_value=1-(which(increasing_chisq_stat>chisq_statistic_original)[1])/1000}
+  table_data[1,3] = p_value
+
+  
+  
+  
+  
+load("C:/Users/wjyjy/Documents/TDA/Mandibular Molars/alignment_ECT/Tarsius.RData")
+Tarsius = data
+
+ECT_list=list()
+for (i in 1:28) {
+  ECT_list[[i]]=t(Tarsius[[i]])
+}
+
+number_iterations =28
+number_directions = 2918
+grid_length = 200
+T=3
+
+    t_grid=seq(from=0, to=T, length.out = grid_length)
+    SECT_list=list()
+    ECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (iterations in 1:number_iterations) {
+    
+    
+    ECT_2D_results=ECT_list[[iterations]]
+    PECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (i in 1:dim(ECT_2D_results)[2]) {
+      PECT[,i]=(T/grid_length)*cumsum(ECT_2D_results[,i])
+    }
+    
+    PECT_2D_results=PECT
+    SECT=matrix(NA, ncol = number_directions, nrow = grid_length)
+    for (i in 1:dim(PECT_2D_results)[2]) {
+      SECT[,i]=PECT_2D_results[,i]-(PECT_2D_results[dim(PECT_2D_results)[1],i]/T)*t_grid
+    }
+    
+    SECT_list[[iterations]]=SECT
+  }
+
+cl <- makeCluster(16)
+registerDoParallel(cl)
+
+number_permutations=100
+
+  SECT_1_original_list=list()
+  SECT_2_original_list=list()
+  chisq_statistic_seq=vector()
+  SECT_both_list = SECT_list
+  number_iterations=14
+  
+  p_value_seq=list()
+  p_value_seq <- foreach(perm = 1:number_permutations) %dopar% {
+    
+    all_indices=1:(2*number_iterations)
+    sampled_indices=sample(all_indices, size=number_iterations, replace = FALSE)
+    unsampled_indices=all_indices[-sampled_indices]
+    for (i in 1:number_iterations) {
+      SECT_1_original_list[[i]]=SECT_both_list[[sampled_indices[i]]]
+      SECT_2_original_list[[i]]=SECT_both_list[[unsampled_indices[i]]]
+    }
+  
+     M_1=SECT_1_original_list[[1]]
+  for (i in 2:number_iterations) {
+    M_1=M_1+SECT_1_original_list[[i]]
+  }
+  M_1=(1/number_iterations)*M_1
+  M_2=SECT_2_original_list[[1]]
+  for (i in 2:number_iterations) {
+    M_2=M_2+SECT_2_original_list[[i]]
+  }
+  M_2=(1/number_iterations)*M_2
+  
+  
+  ###############################################################
+  ### Select the distinguishing direction
+  ###############################################################
+  
+  supnorm=vector()
+  for (directions in 1:number_directions) {
+    supnorm[directions]=max(abs(M_1[,directions]-M_2[,directions]))
+  }
+  distinguishing_direction_index=max(which.max(supnorm))
+  
+  
+  ###############################################################
+  ### Karhunen-Loeve decomposition
+  ###############################################################
+  
+  SECT_1_distinguishing_direction=matrix(NA, ncol = number_iterations, nrow = grid_length)
+  for (i in 1:number_iterations) {
+    SECT_1_distinguishing_direction[,i]=SECT_1_original_list[[i]][, distinguishing_direction_index]
+  }
+  SECT_2_distinguishing_direction=matrix(NA, ncol = number_iterations, nrow = grid_length)
+  for (i in 1:number_iterations) {
+    SECT_2_distinguishing_direction[,i]=SECT_2_original_list[[i]][, distinguishing_direction_index]
+  }
+  
+  demean_all=matrix(NA, ncol = 2*number_iterations, nrow = grid_length)
+  for (i in 1:number_iterations) {
+    demean_all[,i]=SECT_1_distinguishing_direction[,i]-M_1[, distinguishing_direction_index]
+  }
+  for (i in 1:number_iterations) {
+    demean_all[,number_iterations+i]=SECT_2_distinguishing_direction[,i]-M_2[, distinguishing_direction_index]
+  }
+  
+  CovKer=cov(t(demean_all))
+  eigen_results=eigen(CovKer)
+  result <- pmax(eigen_results$values, 0)
+
+  # We only care about the components having 99% cumulative variance.
+  L_original=max(which(cumsum(result)/sum(result)<0.99))
+  L=L_original
+  Eigen_values=(T/grid_length)*result[1:L]
+  Eigen_vectors=sqrt(grid_length/T)*eigen_results$vectors[,1:L]
+  
+  Xis=matrix(NA, ncol = L, nrow = number_iterations)
+  for (i in 1:number_iterations) {
+    Xi=vector()
+    for (l in 1:L) {
+      Xi[l]=(1/sqrt(2*Eigen_values[l]))*(T/grid_length)*sum((SECT_1_distinguishing_direction[,i]-SECT_2_distinguishing_direction[,i])*Eigen_vectors[,l])
+    }
+    Xis[i,]=Xi
+  }
+  
+  chisq_statistic_original=sum((sqrt(number_iterations)*apply(Xis, 2, mean))^2)
+  
+  
+  ###############################################################
+  ### Permutation test
+  ###############################################################
+  
+  number_permutations_2=1000
+  SECT_1_list=list()
+  SECT_2_list=list()
+  chisq_statistic_seq=vector()
+  
+  for (permu in 1:number_permutations_2) {
+    
+    all_indices=1:(2*number_iterations)
+    sampled_indices=sample(all_indices, size=number_iterations, replace = FALSE)
+    unsampled_indices=all_indices[-sampled_indices]
+    for (i in 1:number_iterations) {
+      SECT_1_list[[i]]=SECT_both_list[[sampled_indices[i]]]
+      SECT_2_list[[i]]=SECT_both_list[[unsampled_indices[i]]]
+    }
+    
+    
+    ###############################################################
+    ### Compute the mean functions of the two SECT collections
+    ###############################################################
+    
+    M_1=SECT_1_list[[1]]
+    for (i in 2:number_iterations) {
+      M_1=M_1+SECT_1_list[[i]]
+    }
+    M_1=(1/number_iterations)*M_1
+    M_2=SECT_2_list[[1]]
+    for (i in 2:number_iterations) {
+      M_2=M_2+SECT_2_list[[i]]
+    }
+    M_2=(1/number_iterations)*M_2
+    
+    
+    ###############################################################
+    ### Select the distinguishing direction
+    ###############################################################
+    
+    supnorm=vector()
+    for (directions in 1:number_directions) {
+      supnorm[directions]=max(abs(M_1[,directions]-M_2[,directions]))
+    }
+    distinguishing_direction_index=max(which.max(supnorm))
+    
+    
+    ###############################################################
+    ### Karhunen-Loeve decomposition
+    ###############################################################
+    
+    SECT_1_distinguishing_direction=matrix(NA, ncol = number_iterations, nrow = grid_length)
+    for (i in 1:number_iterations) {
+      SECT_1_distinguishing_direction[,i]=SECT_1_list[[i]][, distinguishing_direction_index]
+    }
+    SECT_2_distinguishing_direction=matrix(NA, ncol = number_iterations, nrow = grid_length)
+    for (i in 1:number_iterations) {
+      SECT_2_distinguishing_direction[,i]=SECT_2_list[[i]][, distinguishing_direction_index]
+    }
+    
+    demean_all=matrix(NA, ncol = 2*number_iterations, nrow = grid_length)
+    for (i in 1:number_iterations) {
+      demean_all[,i]=SECT_1_distinguishing_direction[,i]-M_1[, distinguishing_direction_index]
+    }
+    for (i in 1:number_iterations) {
+      demean_all[,number_iterations+i]=SECT_2_distinguishing_direction[,i]-M_2[, distinguishing_direction_index]
+    }
+    
+    CovKer=cov(t(demean_all))
+    eigen_results=eigen(CovKer)
+    result <- pmax(eigen_results$values, 0)
+
+    # We only care about the components having 99% cumulative variance.
+    L=L_original
+    Eigen_values=(T/grid_length)*result[1:L]
+    Eigen_vectors=sqrt(grid_length/T)*eigen_results$vectors[,1:L]
+    
+    Xis=matrix(NA, ncol = L, nrow = number_iterations)
+    for (i in 1:number_iterations) {
+      Xi=vector()
+      for (l in 1:L) {
+        Xi[l]=(1/sqrt(2*Eigen_values[l]))*(T/grid_length)*sum((SECT_1_distinguishing_direction[,i]-SECT_2_distinguishing_direction[,i])*Eigen_vectors[,l])
+      }
+      Xis[i,]=Xi
+    }
+    
+    chisq_statistic_seq[permu]=sum((sqrt(number_iterations)*apply(Xis, 2, mean))^2)
+    
+  }
+  
+  increasing_chisq_stat=sort(chisq_statistic_seq)
+  p_value_seq[[perm]]=1-(which(increasing_chisq_stat>chisq_statistic_original)[1])/1000
+  }
+
+p_value_final=vector()
+for (i in 1:100) {
+  p_value_final[i]=p_value_seq[[i]]
+}
+
+  table_data[7,3] = mean(p_value_final)
+
+stopImplicitCluster()
+stopCluster(cl)
+```
+
+

@@ -12,3 +12,8 @@ Running [Algorithm 2.Rmd](https://github.com/JinyuWang123/TDA/blob/main/Simulati
 
 ### # The parameter determining the distribution P^{(epsilon)} 
 ### epsilon=0
+
+
+### Important Information
+If you want to run a single RMD file to generate table1, please run [overall_table1.Rmd
+](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code-table1/overall_table1.Rmd)

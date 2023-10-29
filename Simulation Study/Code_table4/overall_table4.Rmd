@@ -414,11 +414,11 @@ for (i_table in 1:length(number_directions_values)) {
 # Range of levels t in [0, T]
 T=3
 # Number of directions v in S^1
-number_directions=4
+number_directions=number_directions_values[i_table]
 # Number of levels t in [0, T]
-grid_length=50
+grid_length=grid_length_values[j_table]
 # Number of simulated shapes in each collection
-number_iterations=50
+number_iterations=number_iterations_values[q_table]
 # The thickness of shapes 
 R=0.2
 # Variance of the random axis lengths

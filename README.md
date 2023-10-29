@@ -18,22 +18,22 @@ If you want to run a single RMD file to generate table1, please run [overall_tab
 
 If you want to run a single RMD file to generate table2, please run [overall_table2.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Code_table2/overall_table2.Rmd)
-### Code for table3-Appendix Table 1
+### Code for Appendix Table 1 (arxiv-table3)
 [Code-table3](https://github.com/JinyuWang123/TDA/tree/main/Silhouette%20Database/Code_table3) produces the results displayed in Table 3.
 
 If you want to run a single RMD file to generate table3, please run [overall_table3.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Silhouette%20Database/Code_table3/overall_table3.Rmd)
-### Code for table4-Appendix Table 2
+### Code for Appendix Table 2 (arxiv-table3)
 [Code-table4](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table4) produces the results displayed in Table 4.
 
 If you want to run a single RMD file to generate table4, please run [overall_table4.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_table4/overall_table4.Rmd)
-### Code for table5-Appendix Table 3
+### Code for Appendix Table 3 (arxiv-table5)
 [Code-table5](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table5) produces the results displayed in Table 5.
 
 If you want to run a single RMD file to generate table5, please run [overall_table5.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_table5/overall_table5.Rmd)
-### Code for table6-Appendix Table 4
+### Code for Appendix Table 4 (arxiv-table6)
 [Code-table6](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table6) produces the results displayed in Table 6.
 
 If you want to run a single RMD file to generate table6, please run [overall_table6.Rmd
@@ -51,22 +51,22 @@ It comes from Figure 5. See the code for Figure 5.
 If you want to run a single RMD file to generate table1, please run [Figure 3.R](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure3/Figure%203.R)
 ### Code for Figure 4
 It comes from the reference [Wang (2021)](https://projecteuclid.org/journals/annals-of-applied-statistics/volume-15/issue-2/A-statistical-pipeline-for-identifying-physical-features-that-differentiate-classes/10.1214/20-AOAS1430.full).
-### Code for Figure 5-Appendix Figure 1
+### Code for Appendix Figure 1 (arxiv-Figure5)
 [Code_Figure5](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure5) produces the results displayed in Figure 5.
 
 If you want to run a single RMD file to generate table1, please run [Figure 5.R
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure5/Figure%205.R)
-### Code for Figure 6-Appendix Figure 2
+### Code for Appendix Figure 2 (arxiv-Figure6)
 [Code-Figure6](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure6) produces the results displayed in Figure 6.
 
 If you want to run a single RMD file to generate table1, please run [Figure 6.R
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure6/Figure%206.R)
-### Code for Figure 7-Appendix Figure 3
+### Code for Appendix Figure 3 (arxiv-Figure7)
 [Code-Figure7](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure7) produces the results displayed in Figure 7.
 
 If you want to run a single RMD file to generate table1, please run [Figure 7.R
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure7/Figure%207.R)
-### Code for Figure 8-Appendix Figure 4
+### Code for Appendix Figure 4 (arxiv-Figure8)
 It comes from the [MPEG-7 shape silhouette database](https://dabi.temple.edu/external/shape/MPEG7/dataset.html)
 ## The R Environment
 Code for this manuscript was run in R (version 4.2, Compatible with version 3.6 - 4.2). R is a widely used, free, and open source software environment for statistical computing and graphics. The most recent version of R can be downloaded from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/). For specific details on how to compile, install, and manage R and R-packages, refer to the manual [R Installation and Administration](https://cran.r-project.org/doc/manuals/r-release/R-admin.html).

@@ -22,6 +22,8 @@ If you want to run a single RMD file to generate table3, please run [overall_tab
 ](https://github.com/JinyuWang123/TDA/blob/main/Silhouette%20Database/Code_table3/overall_table3.Rmd)
 ### Code for table4-Appendix Table 2
 [Code-table4](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table4) produces the results displayed in Table 4.
+If you want to run a single RMD file to generate table4, please run [overall_table4.Rmd
+](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_table4/overall_table4.Rmd)
 ### Code for table5-Appendix Table 3
 [Code-table5](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table5) produces the results displayed in Table 5.
 ### Code for table6-Appendix Table 4

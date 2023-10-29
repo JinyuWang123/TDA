@@ -10,6 +10,7 @@ Results in the manuscript were derived by using the R version of the code. Based
 
 ### Code for table1
 [Code-table1](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code-table1) produces the results displayed in Table 1.
+
 If you want to run a single RMD file to generate table1, please run [overall_table1.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code-table1/overall_table1.Rmd)
 ### Code for table2

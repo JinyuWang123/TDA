@@ -30,7 +30,8 @@ If you want to run a single RMD file to generate table5, please run [overall_tab
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_table5/overall_table5.Rmd)
 ### Code for table6-Appendix Table 4
 [Code-table6](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table6) produces the results displayed in Table 6.
-
+If you want to run a single RMD file to generate table6, please run [overall_table6.Rmd
+](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_table6/overall_table6.Rmd)
 ### Code for Figure 1
 [Code-Figure1](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_Figure1) produces the results displayed in Figure 1.
 If you want to run a single RMD file to generate table1, please run [Fig1.R

@@ -43,22 +43,20 @@ It comes from Figure 5. See the code for Figure 5.
 If you want to run a single RMD file to generate table1, please run [Figure 3.R](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure3/Figure%203.R)
 ### Code for Figure 4
 It comes from the reference [Wang (2021)](https://projecteuclid.org/journals/annals-of-applied-statistics/volume-15/issue-2/A-statistical-pipeline-for-identifying-physical-features-that-differentiate-classes/10.1214/20-AOAS1430.full).
-### Code for Figure 5
-[Code-Figure1](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_Figure1) produces the results displayed in Figure 1.
-If you want to run a single RMD file to generate table1, please run [Fig1.R
-](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Code_Figure1/Fig1.R)
-### Code for Figure 6
-[Code-Figure1](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_Figure1) produces the results displayed in Figure 1.
-If you want to run a single RMD file to generate table1, please run [Fig1.R
-](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Code_Figure1/Fig1.R)
-### Code for Figure 7
-[Code-Figure1](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_Figure1) produces the results displayed in Figure 1.
-If you want to run a single RMD file to generate table1, please run [Fig1.R
-](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Code_Figure1/Fig1.R)
-### Code for Figure 8
-[Code-Figure1](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_Figure1) produces the results displayed in Figure 1.
-If you want to run a single RMD file to generate table1, please run [Fig1.R
-](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Code_Figure1/Fig1.R)
+### Code for Figure 5-Appendix Figure 1
+[Code_Figure5](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure5) produces the results displayed in Figure 5.
+If you want to run a single RMD file to generate table1, please run [Figure 5.R
+](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure5/Figure%205.R)
+### Code for Figure 6-Appendix Figure 2
+[Code-Figure6](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure6) produces the results displayed in Figure 6.
+If you want to run a single RMD file to generate table1, please run [Figure 6.R
+](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure6/Figure%206.R)
+### Code for Figure 7-Appendix Figure 3
+[Code-Figure7](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure7) produces the results displayed in Figure 7.
+If you want to run a single RMD file to generate table1, please run [Figure 7.R
+](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure7/Figure%207.R)
+### Code for Figure 8-Appendix Figure 4
+It comes from the [MPEG-7 shape silhouette database](https://dabi.temple.edu/external/shape/MPEG7/dataset.html)
 ## The R Environment
 Code for this manuscript was run in R (version 4.2, Compatible with version 3.6 - 4.2). R is a widely used, free, and open source software environment for statistical computing and graphics. The most recent version of R can be downloaded from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/). For specific details on how to compile, install, and manage R and R-packages, refer to the manual [R Installation and Administration](https://cran.r-project.org/doc/manuals/r-release/R-admin.html).
 

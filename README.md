@@ -44,7 +44,7 @@ If you want to run a single RMD file to generate Table 6, please run [overall_ta
 If you want to run a single RMD file to generate Figure 1, please run [Fig1.R
 ](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Code_Figure1/Fig1.R)
 ### Code for Figure 2
-It comes from Figure 5. See the code for Figure 5.
+Note that Figure 2a and 2c are also given in Figure 5. See the code for Figure 5g and 5h. For replication of these results please code for Figure 5.
 ### Code for Figure 3
 [Code_Figure3](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure3) produces the results displayed in Figure 3.
 

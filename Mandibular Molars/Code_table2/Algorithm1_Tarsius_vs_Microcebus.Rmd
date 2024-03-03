@@ -141,8 +141,8 @@ for (i in 1:number_iterations) {
   eigen_results=eigen(CovKer)
   result <- pmax(eigen_results$values, 0)
 
-  # We only care about the components having 95% cumulative variance.
-  L=max(which(cumsum(result)/sum(result)<0.98))
+  # We only care about the components having 99% cumulative variance.
+  L=max(which(cumsum(result)/sum(result)<0.99))
   Eigen_values=(T/grid_length)*result[1:L]
   Eigen_vectors=sqrt(grid_length/T)*eigen_results$vectors[,1:L]
   

@@ -78,4 +78,4 @@ Other details and required information of this manuscript are provided in the RE
 K. Meng, J. Wang, L. Crawford and A. Eloyan. Randomness of Shapes and Statistical Inference on Shapes via the Smooth Euler Characteristic Transform. arXiv preprint arXiv:2204.12699, 2022.
 ## Questions and Feedback
 Should you have any questions, please feel free to contact [Kun Meng](mailto:kun_meng@brown.edu) or [Jinyu Wang](mailto:jinyu_wang@brown.edu).
-We appreciate any feedback you may have with our repository and instructions..
+We appreciate any feedback you may have with our repository and instructions.

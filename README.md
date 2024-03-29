@@ -66,7 +66,7 @@ If you want to run a single RMD file to generate Figure D.1, please run [Figure_
 If you want to run a single RMD file to generate Figure D.2, please run [Figure_D.2.R
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure_D.2/Figure_D.2.R)
 ### Code for Appendix Figure D.3
-[Code-Figure7](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure7) produces the results displayed in Figure D.3.
+[Code_Figure_D.3](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure_D.3) produces the results displayed in Figure D.3.
 
 If you want to run a single RMD file to generate Figure D.3, please run [Figure 7.R
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure7/Figure%207.R)

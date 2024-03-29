@@ -65,10 +65,10 @@ If you want to run a single RMD file to generate Figure D.1, please run [Figure 
 
 If you want to run a single RMD file to generate Figure D.2, please run [Figure 6.R
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure6/Figure%206.R)
-### Code for Appendix Figure 3 (arxiv-Figure7)
-[Code-Figure7](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure7) produces the results displayed in Figure 7.
+### Code for Appendix Figure D.3
+[Code-Figure7](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure7) produces the results displayed in Figure D.3.
 
-If you want to run a single RMD file to generate Figure 7, please run [Figure 7.R
+If you want to run a single RMD file to generate Figure D.3, please run [Figure 7.R
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure7/Figure%207.R)
 ### Code for Appendix Figure 4 (arxiv-Figure8)
 It comes from the [MPEG-7 shape silhouette database](https://dabi.temple.edu/external/shape/MPEG7/dataset.html)

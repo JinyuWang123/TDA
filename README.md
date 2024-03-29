@@ -50,10 +50,10 @@ If you want to run a single RMD file to generate Figure 1.1, please run [Fig1.R
 ](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Code_Figure1/Fig1.R)
 ### Code for Figure 3.1
 Note that Figure 3.1(a) and 3.1(c) are also given in Figure D.1. See the code for Figure D.1(g) and D.1(h). For replication of these results please code for Figure D.1.
-### Code for Figure 3
-[Code_Figure3](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure3) produces the results displayed in Figure 3.
+### Code for Figure 6.1
+[Code_Figure3](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure3) produces the results displayed in Figure 6.1.
 
-If you want to run a single RMD file to generate Figure 3, please run [Figure 3.R](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure3/Figure%203.R)
+If you want to run a single RMD file to generate Figure 6.1, please run [Figure 3.R](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure3/Figure%203.R)
 
 ### Code for Appendix Figure 1 (arxiv-Figure5)
 [Code_Figure5](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure5) produces the results displayed in Figure 5.

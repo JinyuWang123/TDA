@@ -29,7 +29,7 @@ If you want to run a single RMD file to generate Table I.1, please run [overall_
 [Code-tableJ.1](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Table%20J.1/Existing%20fdANOVA%20methods.Rmd)
 
 ### Code for Appendix Table K.1
-[Code-table4](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table4) produces the results displayed in Table K.1.
+[Code_table_K.1](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table_K.1) produces the results displayed in Table K.1.
 
 If you want to run a single RMD file to generate Table K.1, please run [overall_table4.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_table4/overall_table4.Rmd)

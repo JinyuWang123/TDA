@@ -26,7 +26,7 @@ If you want to run a single RMD file to generate Table 2, please run [overall_ta
 ### Code for Appendix Table I.1
 [Code-table3](https://github.com/JinyuWang123/TDA/tree/main/Silhouette%20Database/Code_table3) produces the results displayed in Table I.1.
 ### Code for Appendix Table J.1
-[Code-tableJ.1]
+[Code-tableJ.1](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Table%20J.1/Existing%20fdANOVA%20methods.Rmd)
 
 If you want to run a single RMD file to generate Table I.1, please run [overall_table3.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Silhouette%20Database/Code_table3/overall_table3.Rmd)

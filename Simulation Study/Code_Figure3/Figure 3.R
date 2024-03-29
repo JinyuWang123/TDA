@@ -1,3 +1,7 @@
+#################################################################
+## Kun Meng, Division of Applied Mathematics, Brown University
+#################################################################
+
 
 #install.packages("MASS")
 library("MASS")
@@ -40,7 +44,7 @@ R=0.2
 # Variance of the random axis lengths
 radius_variance=0.05
 # The parameter determining the distribution P^{(epsilon)}
-epsilon=0.075
+epsilon=0.08
 
 I=100
 
@@ -128,21 +132,57 @@ for (iter in 1:3) {
 
 #######################
 
-epsilon.indices=c(0, 0.0125, 0.025, 0.0375, 0.05, 0.075, 0.1)
-rejection_rates_al_1=c(0.15, 0.16, 0.32, 0.67, 0.92, 0.98, 1)
-rejection_rates_al_2=c(0.03, 0.14, 0.22, 0.47, 0.74, 1, 1)
-rejection_rates_al_3=c(0.01, 0.1, 0.11, 0.34, 0.66, 0.99,1)
+epsilon.indices=c(0.00, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.10)
+rejection_rates_al_1=c(0.118, 0.161, 0.315, 0.519, 0.785, 0.910,  0.975, 0.990, 1.000)
+rejection_rates_al_2=c(0.046, 0.054, 0.162, 0.343, 0.612, 0.789, 0.931, 0.994, 1.000)
+rejection_rates_al_3=c(0.05, 0.05, 0.111, 0.185, 0.335, 0.535, 0.739, 0.983, 0.999)
+rejection_rates_FP=c(0.136, 0.153, 0.308, 0.539, 0.810, 0.924, 0.986, 0.997, 1.000)
+rejection_rates_CH=c(0.136, 0.141, 0.309, 0.539, 0.806, 0.927, 0.985, 0.997, 1.000)
+rejection_rates_CS=c(0.139, 0.148, 0.318, 0.547, 0.807, 0.933, 0.985, 0.997, 1.000)
+rejection_rates_L2N=c(0.138, 0.147, 0.319, 0.550, 0.809, 0.931, 0.985, 0.997, 1.000)
+rejection_rates_L2B=c(0.139, 0.155, 0.321, 0.557, 0.810, 0.933, 0.985, 0.997, 1.000)
+rejection_rates_L2b=c(0.138, 0.147, 0.319, 0.551, 0.803, 0.929, 0.985, 0.997, 1.000)
+rejection_rates_FN=c(0.136, 0.144, 0.316, 0.544, 0.807, 0.929, 0.985, 0.997, 1.000)
+rejection_rates_FB=c(0.138, 0.147, 0.318, 0.546, 0.808, 0.929, 0.985, 0.997, 1.000)
+rejection_rates_Fb=c(0.138, 0.139, 0.309, 0.541, 0.802, 0.925, 0.984, 0.997, 1.000)
+rejection_rates_TRP.ANOVA=c(0.073, 0.091, 0.256, 0.510, 0.782, 0.931, 0.980, 0.997, 1.000)
+rejection_rates_TRP.ATS=c(0.076, 0.093, 0.258, 0.519, 0.785, 0.932, 0.982, 0.997, 1.000)
+rejection_rates_TRP.WTPS=c(0.075, 0.091, 0.261, 0.515, 0.790, 0.929, 0.980, 0.997, 1.000)
 
 par(mfrow=c(1,1), mar=c(4.2,4.2,0.2,0.2))
-plot(epsilon.indices, rejection_rates_al_2, type="l", lwd=1.5,
-     ylim = c(0,1),
-     xlab = "epsilon", ylab = "Rejection rates", col="darkgreen")
+plot(epsilon.indices, rejection_rates_FP, type = "l", 
+     ylim = c(0,1), lwd = 1, col =" grey",
+     xlab = "epsilon", ylab = "Rejection rates", )
+lines(epsilon.indices, rejection_rates_FP, type = "p", pch= 4, col = "grey", cex = 0.5)
+lines(epsilon.indices, rejection_rates_CH, lwd = 1, col = "grey")
+lines(epsilon.indices, rejection_rates_CH, type = "p", pch= 4, col = "grey", cex = 0.5)
+lines(epsilon.indices, rejection_rates_CS, lwd = 1, col = "grey")
+lines(epsilon.indices, rejection_rates_CS, type = "p", pch= 4, col = "grey", cex = 0.5)
+lines(epsilon.indices, rejection_rates_L2N, lwd = 1, col = "grey")
+lines(epsilon.indices, rejection_rates_L2N, type = "p", pch= 4, col = "grey", cex = 0.5)
+lines(epsilon.indices, rejection_rates_L2B, lwd = 1, col = "grey")
+lines(epsilon.indices, rejection_rates_L2B, type = "p", pch= 4, col = "grey", cex = 0.5)
+lines(epsilon.indices, rejection_rates_L2b, lwd = 1, col = "grey")
+lines(epsilon.indices, rejection_rates_L2b, type = "p", pch= 4, col = "grey", cex = 0.5)
+lines(epsilon.indices, rejection_rates_FN, lwd = 1, col = "grey")
+lines(epsilon.indices, rejection_rates_FN, type = "p", pch= 4, col = "grey", cex = 0.5)
+lines(epsilon.indices, rejection_rates_FB, lwd = 1, col = "grey")
+lines(epsilon.indices, rejection_rates_FB, type = "p", pch= 4, col = "grey", cex = 0.5)
+lines(epsilon.indices, rejection_rates_Fb, lwd = 1, col = "grey")
+lines(epsilon.indices, rejection_rates_Fb, type = "p", pch= 4, col = "grey", cex = 0.5)
+lines(epsilon.indices, rejection_rates_TRP.ANOVA, lwd = 1, col ="grey")
+lines(epsilon.indices, rejection_rates_TRP.ANOVA, type = "p", pch= 4, col = "grey", cex = 0.5)
+lines(epsilon.indices, rejection_rates_TRP.ATS, lwd = 1, col ="grey")
+lines(epsilon.indices, rejection_rates_TRP.ATS, type = "p", pch= 4, col = "grey", cex = 0.5)
+lines(epsilon.indices, rejection_rates_TRP.WTPS, lwd = 1, col ="grey")
+lines(epsilon.indices, rejection_rates_TRP.WTPS, type = "p", pch= 4, col = "grey", cex = 0.5)
 abline(h=0.05, lty=2, col = "red")
-lines(epsilon.indices, rejection_rates_al_3, type="l", lwd=1.5, col="grey")
-lines(epsilon.indices, rejection_rates_al_1, type="l", lwd=1.5)
-lines(epsilon.indices, rejection_rates_al_2, type="p", col="orange", pch=16)
-lines(epsilon.indices, rejection_rates_al_3, type="p", col="purple", pch=17)
-lines(epsilon.indices, rejection_rates_al_1, type="p", col="red", pch=15)
-legend("bottomright", c("Algorithm 1", "Algorithm 2", "Algorithm 3"), 
-       col=c("red", "orange", "purple"), pch=c(15, 16, 17))
-
+lines(epsilon.indices, rejection_rates_al_3, type="l", lwd=2, col="purple")
+lines(epsilon.indices, rejection_rates_al_2, type="l", lwd=2, col="blue")
+lines(epsilon.indices, rejection_rates_al_1, type="l", lwd=2, col="red")
+lines(epsilon.indices, rejection_rates_al_3, type="p", col="purple", pch=17, cex = 1.3)
+lines(epsilon.indices, rejection_rates_al_2, type="p", col="blue", pch=16, cex = 1.3)
+lines(epsilon.indices, rejection_rates_al_1, type="p", col="red", pch=15, cex = 1.3)
+legend("bottomright", c("Algorithm 1", "Algorithm 2", "Algorithm 3", "Existing fdANOVA methods"), 
+       col=c("red", "blue", "purple", "grey"), pch=c(15, 16, 17, 4),
+       lty = rep(1, 4), lwd = c(rep(2, 3), 1))

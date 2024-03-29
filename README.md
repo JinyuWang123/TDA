@@ -46,8 +46,8 @@ If you want to run a single RMD file to generate Table K.3, please run [overall_
 ### Code for Figure 1.1
 [Code_Figure_1.1](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_Figure_1.1) produces the results displayed in the left panel of Figure 1.1. The right panel of Figure 1.1 comes from the reference [Wang (2021)](https://projecteuclid.org/journals/annals-of-applied-statistics/volume-15/issue-2/A-statistical-pipeline-for-identifying-physical-features-that-differentiate-classes/10.1214/20-AOAS1430.full).
 
-If you want to run a single RMD file to generate Figure 1.1, please run [Fig1.R
-](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Code_Figure1/Fig1.R)
+If you want to run a single RMD file to generate Figure 1.1, please run [Fig1.1.R
+](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Code_Figure_1.1/Fig1.1.R)
 ### Code for Figure 3.1
 Note that Figure 3.1(a) and 3.1(c) are also given in Figure D.1. See the code for Figure D.1(g) and D.1(h). For replication of these results please code for Figure D.1.
 ### Code for Figure 6.1

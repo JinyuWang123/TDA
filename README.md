@@ -38,10 +38,10 @@ If you want to run a single RMD file to generate Table K.1, please run [overall_
 
 If you want to run a single RMD file to generate Table k.2, please run [overall_table5.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_table5/overall_table5.Rmd)
-### Code for Appendix Table 4 (arxiv-table6)
-[Code-table6](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table6) produces the results displayed in Table 6.
+### Code for Appendix Table K.3
+[Code-table6](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table6) produces the results displayed in Table K.3.
 
-If you want to run a single RMD file to generate Table 6, please run [overall_table6.Rmd
+If you want to run a single RMD file to generate Table K.3, please run [overall_table6.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_table6/overall_table6.Rmd)
 ### Code for Figure 1
 [Code-Figure1](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_Figure1) produces the results displayed in the left panel of Figure 1 (arxiv-figure 1). The right panel of Figure 1 (arxiv-figure 4) comes from the reference [Wang (2021)](https://projecteuclid.org/journals/annals-of-applied-statistics/volume-15/issue-2/A-statistical-pipeline-for-identifying-physical-features-that-differentiate-classes/10.1214/20-AOAS1430.full).

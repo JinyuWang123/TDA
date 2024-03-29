@@ -13,12 +13,12 @@ Results in the manuscript were derived by using the R version of the code. Based
 
 ## Organization
 
-### Code for table 6.1
+### Code for Table 6.1
 [Code-table1](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code-table1) produces the results displayed in Table 6.1.
 
 If you want to run a single RMD file to generate Table 1, please run [overall_table1.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code-table1/overall_table1.Rmd)
-### Code for table2
+### Code for Table2
 [Code-table2](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_table2) produces the results displayed in Table 2.
 
 If you want to run a single RMD file to generate Table 2, please run [overall_table2.Rmd

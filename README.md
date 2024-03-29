@@ -22,11 +22,12 @@ If you want to run a single RMD file to generate Table 7.1, please run [overall_
 ](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Code_table_7.1/overall_table_7.1.Rmd)
 ### Code for Appendix Table I.1
 [Code-table_I.1](https://github.com/JinyuWang123/TDA/tree/main/Silhouette%20Database/Code_table_I.1) produces the results displayed in Table I.1.
-### Code for Appendix Table J.1
-[Code-tableJ.1](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Table%20J.1/Existing%20fdANOVA%20methods.Rmd)
 
 If you want to run a single RMD file to generate Table I.1, please run [overall_table3.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Silhouette%20Database/Code_table3/overall_table3.Rmd)
+### Code for Appendix Table J.1
+[Code-tableJ.1](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Table%20J.1/Existing%20fdANOVA%20methods.Rmd)
+
 ### Code for Appendix Table K.1
 [Code-table4](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table4) produces the results displayed in Table K.1.
 

@@ -39,7 +39,7 @@ If you want to run a single RMD file to generate Table K.1, please run [overall_
 If you want to run a single RMD file to generate Table k.2, please run [overall_table_K.2.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_table_K.2/overall_table_K.2.Rmd)
 ### Code for Appendix Table K.3
-[Code-table6](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table6) produces the results displayed in Table K.3.
+[Code_table_K.3](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table_K.3) produces the results displayed in Table K.3.
 
 If you want to run a single RMD file to generate Table K.3, please run [overall_table6.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_table6/overall_table6.Rmd)

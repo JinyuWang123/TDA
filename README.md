@@ -4,7 +4,7 @@ In this project, we establish the mathematical foundations for modeling the rand
 
 Details of our results are presented in the following manuscript:
 
-K. Meng, J. Wang, L. Crawford and A. Eloyan. Randomness of Shapes and Statistical Inference on Shapes via the Smooth Euler Characteristic Transform. arXiv preprint arXiv:2204.12699, 2022.
+[K. Meng, J. Wang, L. Crawford and A. Eloyan. Randomness of Shapes and Statistical Inference on Shapes via the Smooth Euler Characteristic Transform. arXiv preprint arXiv:2204.12699, 2022.](https://arxiv.org/abs/2204.12699)
 
 Results in the manuscript were derived by using the R version of the code. Based on the structure of the manuscript, this repositories is divided into three parts:
 1. Simulation Study (Section 6 of the manuscript)

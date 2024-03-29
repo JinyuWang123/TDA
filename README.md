@@ -51,7 +51,7 @@ If you want to run a single RMD file to generate Figure 1.1, please run [Fig1.1.
 ### Code for Figure 3.1
 Note that Figure 3.1(a) and 3.1(c) are also given in Figure D.1. See the code for Figure D.1(g) and D.1(h). For replication of these results please code for Figure D.1.
 ### Code for Figure 6.1
-[Code_Figure3](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure3) produces the results displayed in Figure 6.1.
+[Code_Figure_6.1](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure_6.1) produces the results displayed in Figure 6.1.
 
 If you want to run a single RMD file to generate Figure 6.1, please run [Figure 3.R](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure3/Figure%203.R)
 

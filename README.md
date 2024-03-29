@@ -53,7 +53,7 @@ Note that Figure 3.1(a) and 3.1(c) are also given in Figure D.1. See the code fo
 ### Code for Figure 6.1
 [Code_Figure_6.1](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure_6.1) produces the results displayed in Figure 6.1.
 
-If you want to run a single RMD file to generate Figure 6.1, please run [Figure 3.R](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure3/Figure%203.R)
+If you want to run a single RMD file to generate Figure 6.1, please run [Figure_6.1.R](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_Figure_6.1/Figure%206.1.R)
 
 ### Code for Appendix Figure D.1
 [Code_Figure5](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_Figure5) produces the results displayed in Figure D.1.

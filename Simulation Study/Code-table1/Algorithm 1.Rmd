@@ -62,7 +62,7 @@ radius_variance=0.05
 # Number of simulation studies
 number_studies=1000
 # The parameter determining the distribution P^{(epsilon)}
-epsilon=0
+epsilon=0.02
 
 I=100
 ```
@@ -105,6 +105,9 @@ registerDoParallel(cl)
 ###############################################################
 #t1<-Sys.time()
 for (studies in 1:number_studies) {
+  
+  print(studies)
+  
   ###############################################################
   ### Generate SECT for the 1st collection
   ###############################################################
@@ -375,6 +378,8 @@ stopCluster(cl)
 ```
 
 ```{r}
+print(paste("The significance level is ", as.character(0.05),"."))
+print(paste("The parameter determining the distribution P^{(epsilon)} is ", as.character(epsilon), "."))
+
 mean(rejection_indicators)
 ```
-

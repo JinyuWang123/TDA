@@ -23,8 +23,8 @@ If you want to run a single RMD file to generate Table 7.1, please run [overall_
 ### Code for Appendix Table I.1
 [Code-table_I.1](https://github.com/JinyuWang123/TDA/tree/main/Silhouette%20Database/Code_table_I.1) produces the results displayed in Table I.1.
 
-If you want to run a single RMD file to generate Table I.1, please run [overall_table3.Rmd
-](https://github.com/JinyuWang123/TDA/blob/main/Silhouette%20Database/Code_table3/overall_table3.Rmd)
+If you want to run a single RMD file to generate Table I.1, please run [overall_table_I.1.Rmd
+](https://github.com/JinyuWang123/TDA/blob/main/Silhouette%20Database/Code_table_I.1/overall_table_I.1.Rmd)
 ### Code for Appendix Table J.1
 [Code-tableJ.1](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Table%20J.1/Existing%20fdANOVA%20methods.Rmd)
 

@@ -33,10 +33,10 @@ If you want to run a single RMD file to generate Table I.1, please run [overall_
 
 If you want to run a single RMD file to generate Table K.1, please run [overall_table4.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_table4/overall_table4.Rmd)
-### Code for Appendix Table 3 (arxiv-table5)
-[Code-table5](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table5) produces the results displayed in Table 5.
+### Code for Appendix Table K.2
+[Code-table5](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table5) produces the results displayed in Table K.2.
 
-If you want to run a single RMD file to generate Table 5, please run [overall_table5.Rmd
+If you want to run a single RMD file to generate Table k.2, please run [overall_table5.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code_table5/overall_table5.Rmd)
 ### Code for Appendix Table 4 (arxiv-table6)
 [Code-table6](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table6) produces the results displayed in Table 6.

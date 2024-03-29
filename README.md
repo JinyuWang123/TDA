@@ -16,7 +16,7 @@ Results in the manuscript were derived by using the R version of the code. Based
 ### Code for Table 6.1
 Note that Table 6.1 is part of Table J.1. See the code for Table J.1.
 ### Code for Table 7.1
-[Code-table_7.1](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_table2) produces the results displayed in Table 7.1.
+[Code-table_7.1](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_table_7.1) produces the results displayed in Table 7.1.
 
 If you want to run a single RMD file to generate Table 2, please run [overall_table2.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Code_table2/overall_table2.Rmd)

@@ -2,8 +2,13 @@
 Refer to Appendix I of the manuscript
 ## Organization
 
-### Code for table3
-[Code-table3](https://github.com/JinyuWang123/TDA/tree/main/Silhouette%20Database/Code_table3) produces the results displayed in Table 3.
+### Code for Appendix Figure I.1
+It comes from the [MPEG-7 shape silhouette database](https://dabi.temple.edu/external/shape/MPEG7/dataset.html)
+### Code for Appendix Table I.1
+[Code-table_I.1](https://github.com/JinyuWang123/TDA/tree/main/Silhouette%20Database/Code_table_I.1) produces the results displayed in Table I.1.
+
+If you want to run a single RMD file to generate Table I.1, please run [overall_table_I.1.Rmd
+](https://github.com/JinyuWang123/TDA/blob/main/Silhouette%20Database/Code_table_I.1/overall_table_I.1.Rmd)
 ## Package Details and Requirements
 The statistical implementation of the simulation study requires the installation of the following important R libraries (we can [install R packages from the command line](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Installing-packages)):
 * [BGLR](https://cran.r-project.org/web/packages/BGLR/index.html)

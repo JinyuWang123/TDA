@@ -6,6 +6,7 @@ Refer to section 6 of the manuscript
 Note that Table 6.1 is part of Table J.1. See the code for Table J.1.
 ### Code for Appendix Table J.1
 [Code-table1](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code-table1) produces the simulation results for the algorithm 1,2,3.
+
 [Code-tableJ.1](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Table%20J.1/Existing%20fdANOVA%20methods.Rmd) produces the simulation results for the existing fdANOVA methods (i.e., FP, CH, CS, L2N, L2B, L2b, FN, FB, Fb, TRP-ANOVA, TRP-ATS, TRP-WTPS).
 ### Code for Appendix Table K.1
 [Code_table_K.1](https://github.com/JinyuWang123/TDA/tree/main/Simulation%20Study/Code_table_K.1) produces the results displayed in Table K.1.

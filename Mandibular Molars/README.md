@@ -2,10 +2,16 @@
 Refer to section 7 of the manuscript
 ## Organization
 
-### Code for table2
-[Code-table2](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_table2) produces the results displayed in Table 2.
-### Code for Figure 1
-[Code-Figure1](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_Figure1) produces the results displayed in Figure 1.
+### Code for Table 7.1
+[Code-table_7.1](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_table_7.1) produces the results displayed in Table 7.1.
+
+If you want to run a single RMD file to generate Table 7.1, please run [overall_table_7.1.Rmd
+](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Code_table_7.1/overall_table_7.1.Rmd)
+### Code for Figure 1.1
+[Code_Figure_1.1](https://github.com/JinyuWang123/TDA/tree/main/Mandibular%20Molars/Code_Figure_1.1) produces the results displayed in the left panel of Figure 1.1. The right panel of Figure 1.1 comes from the reference [Wang (2021)](https://projecteuclid.org/journals/annals-of-applied-statistics/volume-15/issue-2/A-statistical-pipeline-for-identifying-physical-features-that-differentiate-classes/10.1214/20-AOAS1430.full).
+
+If you want to run a single RMD file to generate Figure 1.1, please run [Fig1.1.R
+](https://github.com/JinyuWang123/TDA/blob/main/Mandibular%20Molars/Code_Figure_1.1/Fig1.1.R)
 ## Package Details and Requirements
 The statistical implementation of the simulation study requires the installation of the following important R libraries (we can [install R packages from the command line](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Installing-packages)):
 * [Rvcg](https://cran.r-project.org/web/packages/Rvcg/index.html)

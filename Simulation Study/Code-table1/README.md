@@ -15,5 +15,5 @@ Running [Algorithm 3.Rmd](https://github.com/JinyuWang123/TDA/blob/main/Simulati
 
 
 ### Important Information
-If you want to run a single RMD file to generate table1, please run [overall_table1.Rmd
+If you want to run a single RMD file, please run [overall_table1.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/main/Simulation%20Study/Code-table1/overall_table1.Rmd)

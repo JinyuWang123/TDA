@@ -5,7 +5,7 @@ Running the code to calculate the rejection rates of Algorithms 1, 2, 3 and the 
 
 Running [Algorithm 1.Rmd](https://github.com/JinyuWang123/TDA/blob/197cc4a85b58e1bb22d84756c1476c10998d4b62/Simulation%20Study/Table%20J.1/Algorithm%201.Rmd) produces the result of rejection rates of Algorithm 1($\varepsilon$ = 0).
 
-Running [Algorithm 2.Rmd](https://github.com/JinyuWang123/TDA/blob/ee08fe3ae1ff7de2eae6f915531e18d985d31077/Simulation%20Study/Table%20J.1/Algorithm%202.Rmd) produces the result of rejection rates of Algorithm 2($\varepsilon$ = 0).
+Running [Algorithm 2.Rmd](https://github.com/JinyuWang123/TDA/blob/b7d4213f0c53cea4c6970af4b1c736ebc30864de/Simulation%20Study/Table%20J.1/Algorithm%202.Rmd) produces the result of rejection rates of Algorithm 2($\varepsilon$ = 0).
 
 Running [Algorithm 3.Rmd](https://github.com/JinyuWang123/TDA/blob/ee08fe3ae1ff7de2eae6f915531e18d985d31077/Simulation%20Study/Table%20J.1/Algorithm%203.Rmd) produces the result of rejection rates of Algorithm 3($\varepsilon$ = 0).
 

@@ -16,5 +16,5 @@ Running [Existing fdANOVA methods.Rmd](https://github.com/JinyuWang123/TDA/blob/
 ### # The parameter determining the distribution P^{(epsilon)} 
 ### epsilon=0
 
-If you want to run a single RMD file to generate Table J.1, please run [overall_tableJ.Rmd
+If you want to run a single RMD file to generate Table J.1, please run [overall_tableJ.1.Rmd
 ](https://github.com/JinyuWang123/TDA/blob/397f79407c7a5d758814f393d28a79c98e1653be/Simulation%20Study/Table%20J.1/overall_tableJ.Rmd)

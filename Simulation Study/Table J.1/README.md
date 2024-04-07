@@ -7,7 +7,7 @@ Running [Algorithm 1.Rmd](https://github.com/JinyuWang123/TDA/blob/197cc4a85b58e
 
 Running [Algorithm 2.Rmd](https://github.com/JinyuWang123/TDA/blob/b7d4213f0c53cea4c6970af4b1c736ebc30864de/Simulation%20Study/Table%20J.1/Algorithm%202.Rmd) produces the result of rejection rates of Algorithm 2($\varepsilon$ = 0).
 
-Running [Algorithm 3.Rmd](https://github.com/JinyuWang123/TDA/blob/ee08fe3ae1ff7de2eae6f915531e18d985d31077/Simulation%20Study/Table%20J.1/Algorithm%203.Rmd) produces the result of rejection rates of Algorithm 3($\varepsilon$ = 0).
+Running [Algorithm 3.Rmd](https://github.com/JinyuWang123/TDA/blob/89476ff46ba466664474b85e14e7e34a76e0bc82/Simulation%20Study/Table%20J.1/Algorithm%203.Rmd) produces the result of rejection rates of Algorithm 3($\varepsilon$ = 0).
 
 Running [Existing fdANOVA methods.Rmd](https://github.com/JinyuWang123/TDA/blob/ee08fe3ae1ff7de2eae6f915531e18d985d31077/Simulation%20Study/Table%20J.1/Existing%20fdANOVA%20methods.Rmd) produces the result of rejection rates of the existing fdANOVA methods (i.e., FP, CH, CS, L2N, L2B, L2b, FN, FB, Fb, TRP-ANOVA, TRP-ATS, TRP-WTPS).
 

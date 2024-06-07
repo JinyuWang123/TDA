@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 #remotes::install_github('lcrawlab/SINATRA') 
 #library(sinatra)
-#Post ETC alignments script
+#Post ECT alignments script
 
 # Setup: Grid of 2918 directions 
 # And discretization of 0(3) of size 16,000

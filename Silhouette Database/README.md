@@ -2,9 +2,9 @@
 Refer to Appendix I of the manuscript
 ## Organization
 
-### Code for Appendix Figure I.1
+### Code for Appendix Figure I.1 (JASA Supplemental material: Figure I.1)
 It comes from the [MPEG-7 shape silhouette database](https://dabi.temple.edu/external/shape/MPEG7/dataset.html)
-### Code for Appendix Table I.1
+### Code for Appendix Table I.1 (JASA Supplemental material: Table I.1)
 [Code-table_I.1](https://github.com/JinyuWang123/TDA/tree/main/Silhouette%20Database/Code_table_I.1) produces the results displayed in Table I.1.
 
 If you want to run a single RMD file to generate Table I.1, please run [overall_table_I.1.Rmd
